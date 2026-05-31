@@ -6,43 +6,22 @@ A proposta deve apresentar uma ideia simples, clara e viável para ser desenvolv
 
 ## 1. Nome provisório do jogo
 
-Escreva aqui o nome provisório do jogo.
-
-Exemplo:
-
-> Corrida dos Obstáculos
+#### > **_Pyquiz_**
 
 ## 2. Integrantes do grupo
 
 Liste os integrantes do grupo.
 
-- Nome 1:
+- Nome 1: Lucas Elias Gonçalves Peixoto Lelis de Oliveira
 - Nome 2:
 - Nome 3:
 - Nome 4:
 
 ## 3. Tipo de jogo
 
-Indique o tipo de jogo que será desenvolvido.
-
-Exemplos:
-
-- jogo de desviar de obstáculos;
-- jogo de coleta de itens;
-- labirinto simples;
-- jogo de perguntas e respostas;
-- jogo de memória;
-- Pong;
-- Snake;
-- Breakout;
-- nave desviando de meteoros;
-- corrida simples com obstáculos;
-- jogo de clique rápido;
-- jogo de sobrevivência simples.
+#### > Jogo de Perguntas e Respostas (Quiz) sobre a linguagem Python, com seleção de dificuldade e sistema de pontuação por tempo, desenvolvido com Python e a biblioteca proposta pygame()
 
 Tipo escolhido pelo grupo:
-
-> Escreva aqui.
 
 ## 4. Descrição geral do jogo
 
@@ -57,11 +36,19 @@ Procure responder:
 
 Descrição:
 
-> Escreva aqui.
+#### > O PyQuiz é um jogo de quiz sobre a linguagem Python desenvolvido com a biblioteca Pygame. Ao iniciar, o jogador visualiza uma tela de seleção com três níveis de dificuldade: Fácil, Médio e Difícil. Após escolher o nível, o jogo apresenta uma sequência de perguntas de múltipla escolha com quatro alternativas cada, relacionadas ao conteúdo visto na disciplina.
+
+> Na tela de jogo aparecem:
+
+- A pergunta atual e suas quatro alternativas (A, B, C, D)
+- Um temporizador regressivo de 15 a 20 segundos por questão
+- Uma barra de progresso indicando o avanço no quiz
+- O placar em tempo real (acertos e pontuação acumulada)
+- Quando a questão envolve código Python, um bloco de código é exibido em destaque
+
+O jogador usurá o mouse para selecionar a resposta clicando ou poderá usar a tecla correspondente (A/B/C/D) de acordo com as alternativas. Após responder (ou ao fim do tempo proposto), o jogo exibirá o feedback visual imediato: Verde para acerto ou vermelhor para erro, como também, a explicação da resposta correta. Ao final das questões, é exibida a tela de resultado com a pontuação total e um histórico das respostas;
 
 ## 5. Objetivo do jogador
-
-Explique qual é o objetivo principal do jogador.
 
 Exemplos:
 
@@ -75,7 +62,9 @@ Exemplos:
 
 Objetivo:
 
-> Escreva aqui.
+#### > Responder corretamente o maior número possível de perguntas sobre Python no menor tempo possível, acumulando a maior pontuação antes que o tempo de cada questão se esgote. Em modo multijogador (até 3 jogadores), vence quem terminar o quiz com maior pontuação total.
+
+aqui.
 
 ## 6. Regras principais
 
@@ -97,6 +86,20 @@ Regras do grupo:
 - Regra 4:
 - Regra 5:
 
+#### **Regra 1**:. Cada partida apresenta 15 questões sorteadas aleatoriamente do banco de questões conforme a dificuldade escolhida.
+
+#### **Regra 2**. Cada questão possui um tempo limite de 15 a 20 segundos (variando conforme a dificuldade).
+
+#### **Regra 3**. Responder corretamente dentro do tempo concede pontos; quanto menos tempo usado, mais pontos o jogador recebe.
+
+#### **Regra 4**. Não responder dentro do prazo conta como erro (0 pontos naquela questão).
+
+#### **Regra 5.** Ao errar ou deixar o tempo esgotar, a resposta correta é revelada com explicação.
+
+#### **Regra 6.** O jogo termina ao concluir todas as 15 questões ou quando o jogador encerrar a partida.
+
+#### **Regra 7.** Em modo de 3 jogadores, cada jogador joga sequencialmente; vence quem acumular mais pontos.
+
 ## 7. Condição de vitória
 
 Explique como o jogador vence ou conclui o jogo.
@@ -111,7 +114,7 @@ Exemplos:
 
 Condição de vitória:
 
-> Escreva aqui.
+#### > O jogador vence ao concluir todas as 15 questões com aproveitamento igual ou superior a 70% (pelo menos 11 acertos). Em modo multijogador, vence o jogador com a maior pontuação total ao fim das rodadas. O sistema registra o melhor desempenho em um arquivo de ranking.
 
 ## 8. Condição de derrota ou encerramento
 
@@ -127,7 +130,7 @@ Exemplos:
 
 Condição de derrota ou encerramento:
 
-> Escreva aqui.
+#### > A partida encerra quando todas as 15 questões forem respondidas (com ou sem acerto) ou quando o tempo de todas as questões se esgotar. Não há condição de derrota imediata; o encerramento é natural ao final do quiz, com exibição da pontuação final e classificação (aprovado/reprovado conforme o aproveitamento).
 
 ## 9. Elementos previstos no jogo
 
@@ -135,13 +138,7 @@ Descreva os principais elementos que farão parte do jogo.
 
 ## Jogador ou elemento principal
 
-Exemplo:
-
-> Um personagem controlado pelas setas do teclado.
-
-Descrição:
-
-> Escreva aqui.
+#### **Exemplo:** O jogador interage com o jogo por meio do mouse (clique nas alternativas) e do teclado (teclas A, B, C, D para selecionar as respostas, e Enter para confirmar). Não há personagem visual, o protagonismo é do conteúdo das perguntas.
 
 ## Obstáculos, inimigos ou desafios
 
@@ -151,7 +148,7 @@ Exemplo:
 
 Descrição:
 
-> Escreva aqui.
+#### > O principal desafio é o temporizador regressivo, que pressiona o jogador a pensar e responder rapidamente. Questões com trechos de código Python adicionam uma camada extra de dificuldade, exigindo leitura e interpretação do código antes de responder.
 
 ## Itens, alvos ou objetos de interação
 
@@ -161,7 +158,7 @@ Exemplo:
 
 Descrição:
 
-> Escreva aqui.
+#### > As alternativas de resposta são os elementos de interação principais. Questões que exibem blocos de código funcionam como "itens de contexto" que o jogador deve analisar para escolher a alternativa correta.
 
 ## Pontuação, vidas, tempo ou progresso
 
@@ -171,7 +168,15 @@ Exemplo:
 
 Descrição:
 
-> Escreva aqui.
+#### • Pontuação baseada em acertos e no tempo restante ao responder
+
+#### • Sem sistema de vidas — todas as questões são respondidas independentemente do desempenho
+
+#### • Temporizador por questão: 20s (Fácil), 15s (Médio), 12s (Difícil)
+
+#### • Barra de progresso mostrando questão atual / total de questões
+
+#### • Ranking salvo em arquivo .txt ou .json ao final de cada partida
 
 ## 10. Controles previstos
 
@@ -192,6 +197,12 @@ Controles do grupo:
 - Tecla/comando:
 - Tecla/comando:
 
+- Teclas A / B / C / D: selecionar a alternativa correspondente
+- Clique do mouse: selecionar alternativa clicando no botão visual
+- Enter ou Espaço: confirmar seleção e avançar para a próxima questão
+- ESC: pausar o jogo ou voltar ao menu principal
+- Setas direcionais (↑↓): navegar entre as alternativas
+
 ## 11. Organização inicial do código
 
 Explique como o grupo pretende organizar o código.
@@ -206,8 +217,16 @@ Exemplo:
 
 Organização planejada:
 
-> Escreva aqui.
-
+- • main.py — ponto de entrada; inicializa o Pygame e chama o menu principal
+- • src/config.py — constantes globais: resolução da tela, cores, FPS, tempo por questão
+- • src/menu.py — tela inicial com seleção de dificuldade e menu de opções
+- • src/jogo.py — loop principal do quiz: exibição de perguntas, temporizador, feedback
+- • src/resultado.py — tela de resultado final com pontuação e histórico de respostas
+- • src/ranking.py — leitura e escrita do ranking em arquivo (leitura/escrita de arquivos)
+- • src/questoes.py — carregamento e gerenciamento do banco de questões (listas e dicionários)
+- • data/questoes.json — banco de questões organizado por dificuldade (arquivo de dados)
+- • data/ranking.txt — arquivo de ranking persistente entre partidas
+- • assets/ — fontes, ícones e sons (caso eu implemente)
 
 ## 12. Recursos externos previstos
 
@@ -222,7 +241,10 @@ Exemplo:
 
 Recursos previstos:
 
-> Escreva aqui.
+- • Fonte personalizada gratuita
+- • Sons de feedback (acerto/erro/temporizador) obtidos de bancos de áudio gratuitos (ex: OpenGameArt)
+- • Banco de questões desenvolvido pelo grupo com base nos slides e listas da disciplina
+- • Documentação oficial do Pygame (pygame.org) usada apenas como referência técnica
 
 Caso não pretenda utilizar recursos externos, escreva:
 
@@ -245,9 +267,11 @@ Exemplos:
 
 Dificuldades previstas:
 
-- Dificuldade 1:
-- Dificuldade 2:
-- Dificuldade 3:
+- Dificuldade 1: Implementar o temporizador por questão de forma precisa e integrada ao loop do Pygame
+- Dificuldade 2: Renderizar blocos de código Python formatados dentro da janela do Pygame (quebra de linha, fonte monoespaçada)
+- Dificuldade 3: Organizar e carregar o banco de questões em JSON de forma eficiente, garantindo aleatoriedade sem repetição
+- Dificuldade 4: Implementar o modo multijogador sequencial com controle de turno e placar individual
+- Dificuldade 5: Manter a modularização clara do código com múltiplos arquivos funcionando em conjunto
 
 ## 14. Escopo mínimo para a entrega final
 
@@ -261,7 +285,7 @@ Exemplo:
 
 Escopo mínimo:
 
-> Escreva aqui.
+#### > A versão mínima do PyQuiz terá: tela de menu com seleção de dificuldade (Fácil, Médio, Difícil), 15 questões de múltipla escolha carregadas de arquivo, temporizador por questão, sistema de pontuação, feedback visual de acerto/erro, tela de resultado com aproveitamento percentual, e salvamento do ranking em arquivo.
 
 ## 15. Possíveis melhorias, caso haja tempo
 
@@ -284,3 +308,17 @@ Melhorias possíveis:
 - Melhoria 1:
 - Melhoria 2:
 - Melhoria 3:
+
+#### • Modo multijogador local para até 3 jogadores com placar comparativo
+
+#### • Questões de código aberto: exibir um trecho com erro e pedir ao jogador que identifique a linha incorreta
+
+#### • Efeitos sonoros e trilha sonora de fundo
+
+#### • Tela de ranking persistente com os 10 melhores resultados
+
+#### • Animações de transição entre questões e telas
+
+#### • Geração de relatório PDF ou TXT com o desempenho detalhado ao final da partida
+
+#### • Integração com IA para geração dinâmica de novas questões (modo ilimitado)
