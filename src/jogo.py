@@ -1,142 +1,313 @@
+# src/jogo.py
+# Loop principal do PyQuiz - Protótipo Semana 2
+
 import pygame
 
 from src.config import (
-    LARGURA_TELA,
     ALTURA_TELA,
-    FPS,
-    TITULO_JOGO,
-    CINZA,
+    AMARELO,
+    AZUL,
+    AZUL_CLARO,
+    BRANCO,
+    BRANCO_GELO,
     CAMINHO_RECORDE,
-    CAMINHO_SPRITES,
+    CINZA_ESCURO,
+    FPS,
+    LARGURA_TELA,
+    TITULO_JOGO,
+    VERDE,
+    VERMELHO,
 )
-
+from src.dados import (
+    carregar_recorde,
+    salvar_recorde,
+)
 from src.funcoes import (
     calcular_pontos,
-    jogador_perdeu,
     limitar_valor,
-    verificar_colisao,
-    tomar_dano,
 )
-from src.sprites import pegar_sprite
-from src.dados import (
-    salvar_recorde,
-    carregar_recorde,
-)
+
+
+def desenhar_texto(tela, texto, tamanho, cor, x, y, centralizado=False):
+    ### Renderiza texto na tela usando Pygame
+    fonte = pygame.font.SysFont("arial", tamanho)
+    superficie = fonte.render(texto, True, cor)
+    rect = superficie.get_rect()
+    if centralizado:
+        rect.centerx = x
+    else:
+        rect.x = x
+    rect.y = y
+    tela.blit(superficie, rect)
+
+
+def desenhar_menu(tela, opcao_selecionada):
+    #### Desenha a tela inicial do menu com as opções de dificuldade
+    tela.fill(CINZA_ESCURO)
+
+    desenhar_texto(
+        tela, "PyQuiz", 64, AMARELO, LARGURA_TELA // 2, 80, centralizado=True
+    )
+    desenhar_texto(
+        tela,
+        "Quiz de Python",
+        24,
+        AZUL_CLARO,
+        LARGURA_TELA // 2,
+        155,
+        centralizado=True,
+    )
+    desenhar_texto(
+        tela,
+        "Escolha a dificuldade:",
+        20,
+        BRANCO,
+        LARGURA_TELA // 2,
+        220,
+        centralizado=True,
+    )
+
+    opcoes = ["Facil", "Medio", "Dificil"]
+    cores_opcao = [VERDE, AMARELO, VERMELHO]
+
+    for i, (nome, cor) in enumerate(zip(opcoes, cores_opcao)):
+        y = 280 + i * 70
+        cor_fundo = AZUL if i == opcao_selecionada else (60, 60, 60)
+        pygame.draw.rect(tela, cor_fundo, (250, y, 300, 50), border_radius=10)
+        pygame.draw.rect(tela, cor, (250, y, 300, 50), width=2, border_radius=10)
+        desenhar_texto(
+            tela, nome, 28, cor, LARGURA_TELA // 2, y + 10, centralizado=True
+        )
+
+    desenhar_texto(
+        tela,
+        "Use as setas UP/DOWN para navegar",
+        16,
+        AZUL_CLARO,
+        LARGURA_TELA // 2,
+        510,
+        centralizado=True,
+    )
+    desenhar_texto(
+        tela,
+        "Pressione ENTER para confirmar",
+        16,
+        AZUL_CLARO,
+        LARGURA_TELA // 2,
+        535,
+        centralizado=True,
+    )
+
+
+def desenhar_pergunta(
+    tela, numero, total, pergunta, opcoes, selecionada, acertou, respondeu, correta
+):
+    """Desenha a pergunta atual e suas alternativas na tela."""
+    tela.fill(CINZA_ESCURO)
+
+    ### Cabeçalho
+    desenhar_texto(tela, f"Questao {numero} de {total}", 20, AZUL_CLARO, 20, 15)
+
+    #### Barra de progresso usando limitar_valor do template
+    progresso = limitar_valor(numero, 1, total)
+    largura_barra = int((progresso / total) * (LARGURA_TELA - 40))
+    pygame.draw.rect(
+        tela, (60, 60, 60), (20, 45, LARGURA_TELA - 40, 10), border_radius=5
+    )
+    pygame.draw.rect(tela, AZUL, (20, 45, largura_barra, 10), border_radius=5)
+
+    # Pergunta
+    desenhar_texto(
+        tela, pergunta, 22, BRANCO_GELO, LARGURA_TELA // 2, 80, centralizado=True
+    )
+
+    ### Alternativas
+    letras = ["A", "B", "C", "D"]
+    for i, (letra, opcao) in enumerate(zip(letras, opcoes)):
+        y = 200 + i * 75
+
+        if respondeu:
+            if i == correta:
+                cor_fundo = (0, 80, 0)
+                cor_borda = VERDE
+            elif i == selecionada:
+                cor_fundo = (100, 0, 0)
+                cor_borda = VERMELHO
+            else:
+                cor_fundo = (50, 50, 50)
+                cor_borda = (80, 80, 80)
+        else:
+            cor_fundo = AZUL if i == selecionada else (50, 50, 50)
+            cor_borda = AZUL_CLARO if i == selecionada else (80, 80, 80)
+
+        pygame.draw.rect(tela, cor_fundo, (60, y, 680, 55), border_radius=8)
+        pygame.draw.rect(tela, cor_borda, (60, y, 680, 55), width=2, border_radius=8)
+        desenhar_texto(tela, f"{letra})  {opcao}", 20, BRANCO, 90, y + 16)
+
+    if respondeu:
+        msg = (
+            "Correto! Pressione ENTER para continuar"
+            if acertou
+            else "Errou! Pressione ENTER para continuar"
+        )
+        cor_msg = VERDE if acertou else VERMELHO
+        desenhar_texto(
+            tela, msg, 18, cor_msg, LARGURA_TELA // 2, 520, centralizado=True
+        )
+    else:
+        desenhar_texto(
+            tela,
+            "Setas UP/DOWN para navegar | ENTER para responder",
+            15,
+            AZUL_CLARO,
+            LARGURA_TELA // 2,
+            530,
+            centralizado=True,
+        )
+
+
+def desenhar_resultado(tela, pontos, acertou, recorde):
+    """Desenha a tela de resultado final."""
+    tela.fill(CINZA_ESCURO)
+    desenhar_texto(
+        tela, "Resultado", 48, AMARELO, LARGURA_TELA // 2, 160, centralizado=True
+    )
+    desenhar_texto(
+        tela, f"Pontos: {pontos}", 32, BRANCO, LARGURA_TELA // 2, 250, centralizado=True
+    )
+    desenhar_texto(
+        tela,
+        f"Recorde: {recorde}",
+        22,
+        AZUL_CLARO,
+        LARGURA_TELA // 2,
+        300,
+        centralizado=True,
+    )
+    resultado = "Voce acertou!" if acertou else "Voce errou!"
+    cor = VERDE if acertou else VERMELHO
+    desenhar_texto(tela, resultado, 28, cor, LARGURA_TELA // 2, 350, centralizado=True)
+    desenhar_texto(
+        tela,
+        "ENTER para jogar novamente",
+        18,
+        AZUL_CLARO,
+        LARGURA_TELA // 2,
+        440,
+        centralizado=True,
+    )
+    desenhar_texto(
+        tela,
+        "ESC para sair",
+        16,
+        (150, 150, 150),
+        LARGURA_TELA // 2,
+        470,
+        centralizado=True,
+    )
 
 
 def executar_jogo():
-    """Executa o loop principal do jogo e controla estado, colisões e pontuação."""
+    ### Executa o loop principal do PyQuiz
     pygame.init()
-    
 
     tela = pygame.display.set_mode((LARGURA_TELA, ALTURA_TELA))
+    relogio = pygame.time.Clock()
     pygame.display.set_caption(TITULO_JOGO)
 
-    relogio = pygame.time.Clock()
-    rodando = True
+    #### Questão de teste (Semana 2- apenas um protótipo))
+    pergunta_teste = "Qual e o tipo de dado do valor 42 em Python?"
+    opcoes_teste = ["int", "float", "str", "bool"]
+    correta_teste = 0
 
-    # 1. Carregando as imagens recortadas do Spritesheet
-
-
-    # Jogador: usando tamanho 110x110 para capturar o quadrado perfeitamente
-    player_image = pegar_sprite(CAMINHO_SPRITES, x=110, y=120, width=190, height=190, scale=0.5)
-
-    # Gema pequena: usando tamanho 64x64
-    gem_image    = pegar_sprite(CAMINHO_SPRITES, x=900, y=690, width=200, height=200, scale=0.5)
-
-    # Morcego: usando tamanho 180x120 por causa das asas abertas
-    bat_image    = pegar_sprite(CAMINHO_SPRITES, x=905, y=1060, width=200, height=130, scale=0.5)
-    
-    # 2. Criando a estrutura de Sprites usando Dicionários
-    jogador = {
-        "imagem": player_image,
-        "rect": player_image.get_rect(topleft=(100, 100))
-    }
-
-    gema = {
-        "imagem": gem_image,
-        "rect": gem_image.get_rect(topleft=(500, 300))
-    }
-    
-    inimigo = {
-        "imagem": bat_image,
-        "rect": bat_image.get_rect(topleft=(200, 500))
-    }
-
-    velocidade = 5
-    pontos = 0
-    vidas = 3
+    ### --- Carrega recorde do arquivo usando dados.py do template ---
     recorde = carregar_recorde(CAMINHO_RECORDE)
 
-    # Loop principal: processa entrada, atualiza estado e renderiza a cena.
+    #### --- Estado
+    estado = "menu"
+    opcao_menu = 0
+    opcao_resposta = 0
+    respondeu = False
+    acertou = False
+    pontos = 0
+    rodando = True
+
     while rodando:
         relogio.tick(FPS)
 
+        ### Eventos:
         for evento in pygame.event.get():
             if evento.type == pygame.QUIT:
                 rodando = False
 
-        teclas = pygame.key.get_pressed()
+            if evento.type == pygame.KEYDOWN:
+                if estado == "menu":
+                    if evento.key == pygame.K_UP:
+                        opcao_menu = limitar_valor(opcao_menu - 1, 0, 2)
+                    if evento.key == pygame.K_DOWN:
+                        opcao_menu = limitar_valor(opcao_menu + 1, 0, 2)
+                    if evento.key == pygame.K_RETURN:
+                        estado = "jogando"
+                        opcao_resposta = 0
+                        respondeu = False
 
-        # Movimentação alterando direto os eixos X e Y do retângulo do jogador
-        if teclas[pygame.K_LEFT]:
-            jogador["rect"].x -= velocidade
-        if teclas[pygame.K_RIGHT]:
-            jogador["rect"].x += velocidade
-        if teclas[pygame.K_UP]:
-            jogador["rect"].y -= velocidade
-        if teclas[pygame.K_DOWN]:
-            jogador["rect"].y += velocidade
+                elif estado == "jogando":
+                    if not respondeu:
+                        if evento.key == pygame.K_UP:
+                            opcao_resposta = limitar_valor(opcao_resposta - 1, 0, 3)
+                        if evento.key == pygame.K_DOWN:
+                            opcao_resposta = limitar_valor(opcao_resposta + 1, 0, 3)
+                        if evento.key == pygame.K_RETURN:
+                            respondeu = True
+                            acertou = opcao_resposta == correta_teste
+                            # Usa calcular_pontos do template
+                            if acertou:
+                                pontos = calcular_pontos(pontos, 10)
+                    else:
+                        if evento.key == pygame.K_RETURN:
+                            # Salva recorde usando dados.py do template
+                            if pontos > recorde:
+                                recorde = pontos
+                                salvar_recorde(CAMINHO_RECORDE, recorde)
+                            estado = "fim"
 
-        # Limitando o jogador dentro das bordas da tela usando as propriedades do Rect
-        jogador["rect"].x = limitar_valor(jogador["rect"].x, 0, LARGURA_TELA - jogador["rect"].width)
-        jogador["rect"].y = limitar_valor(jogador["rect"].y, 0, ALTURA_TELA - jogador["rect"].height)
+                elif estado == "fim":
+                    if evento.key == pygame.K_RETURN:
+                        estado = "menu"
+                        opcao_menu = 0
+                        opcao_resposta = 0
+                        respondeu = False
+                        acertou = False
+                        pontos = 0
 
-        # Verificação de colisão com a Gema (antigo 'item')
-        if verificar_colisao(jogador["rect"], gema["rect"]):
-            pontos = calcular_pontos(pontos, 10)
+                if evento.key == pygame.K_ESCAPE:
+                    if estado == "menu":
+                        rodando = False
+                    else:
+                        estado = "menu"
 
-            # Move a gema de lugar ao coletar
-            gema["rect"].x += 80
-            gema["rect"].y += 50
+        ### - Renderização:
+        if estado == "menu":
+            desenhar_menu(tela, opcao_menu)
 
-            # Se a gema sair da tela, volta para uma posição segura
-            if gema["rect"].x > LARGURA_TELA - gema["rect"].width:
-                gema["rect"].x = 50
-            if gema["rect"].y > ALTURA_TELA - gema["rect"].height:
-                gema["rect"].y = 50
+        elif estado == "jogando":
+            desenhar_pergunta(
+                tela,
+                1,
+                1,
+                pergunta_teste,
+                opcoes_teste,
+                opcao_resposta,
+                acertou,
+                respondeu,
+                correta_teste,
+            )
+            pygame.display.set_caption(
+                f"{TITULO_JOGO} | Pontos: {pontos} | Recorde: {recorde}"
+            )
 
-        # Verificação de colisão com o Inimigo
-        if verificar_colisao(jogador["rect"], inimigo["rect"]):
-            vidas = tomar_dano(vidas, 1)
-
-            # Afasta o inimigo ao colidir
-            inimigo["rect"].x += 80
-            inimigo["rect"].y += 50
-
-            if inimigo["rect"].x > LARGURA_TELA - inimigo["rect"].width:
-                inimigo["rect"].x = 50
-            if inimigo["rect"].y > ALTURA_TELA - inimigo["rect"].height:
-                inimigo["rect"].y = 50
-
-        # Regras de fim de jogo e recorde
-        if jogador_perdeu(vidas):
-            rodando = False
-
-        if pontos > recorde:
-            recorde = pontos
-            salvar_recorde(CAMINHO_RECORDE, recorde)
-
-        pygame.display.set_caption(
-            f"{TITULO_JOGO} | Pontos: {pontos} | Recorde: {recorde} | Vidas: {vidas}"
-        )
-
-        tela.fill(CINZA)
-
-        # Desenhando os elementos na tela passando a imagem e o rect de cada dicionário
-        tela.blit(gema["imagem"], gema["rect"])
-        tela.blit(inimigo["imagem"], inimigo["rect"])
-        tela.blit(jogador["imagem"], jogador["rect"])
+        elif estado == "fim":
+            desenhar_resultado(tela, pontos, acertou, recorde)
 
         pygame.display.flip()
 

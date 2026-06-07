@@ -1,5 +1,7 @@
-from src.jogo import executar_jogo
+## Main.py
+## Ponto de Entrada do Pyquiz
 
+from src.jogo import executar_jogo
 
 if __name__ == "__main__":
     # Ponto de entrada da aplicação.
