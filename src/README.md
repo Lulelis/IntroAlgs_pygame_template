@@ -2,7 +2,6 @@
 
 > Quiz de perguntas e respostas sobre a linguagem Python, desenvolvido com Python e Pygame.
 
-
 ## Como executar:
 
 - 1. Clone este repositório
@@ -30,11 +29,11 @@ python main.py
 
 ### Dificuldades:
 
-| Nível | Tempo por questão |
-|--|------------------------|
-|Fácil | 30 segundos |
-| Médio | 20 segundos|
-| Difícil | 15 segundos|
+| Nível   | Tempo por questão |
+| ------- | ----------------- |
+| Fácil   | 30 segundos       |
+| Médio   | 20 segundos       |
+| Difícil | 15 segundos       |
 
 ### Estrutura do projeto
 
@@ -46,29 +45,29 @@ PyQuiz/
 
 ├── src/
 
-│   ├── config.py       ### Configurações gerais
+│ ├── config.py ### Configurações gerais
 
-│   ├── jogo.py         ### Loop principal
+│ ├── jogo.py ### Loop principal
 
-│   ├── funcoes.py      ### Funções auxiliares
+│ ├── funcoes.py ### Funções auxiliares
 
-│   └── dados.py        ### Leitura e escrita de arquivos
+│ └── dados.py ### Leitura e escrita de arquivos
 
 ├── data/
 
-│   ├── questoes.json   ### Banco de questões
+│ ├── questoes.json ### Banco de questões
 
-│   ├── recorde.txt     ### Recorde salvo
+│ ├── recorde.txt ### Recorde salvo
 
-│   └── ranking.txt     ### Ranking das partidas
+│ └── ranking.txt ### Ranking das partidas
 
 ├── tests/
 
-│   └── test_logica.py  ### Testes automatizados
+│ └── test_logica.py ### Testes automatizados
 
 └── docs/
 
-└── proposta.MD     ### Proposta do projeto
+└── proposta.MD ### Proposta do projeto
 
 ### Testes:
 
