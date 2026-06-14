@@ -26,6 +26,6 @@ CAMINHO_QUESTOES = "data/questoes.json"
 
 # --- Jogo ---
 TOTAL_QUESTOES = 15
-TEMPO_FACIL = 20  # segundos por questão
-TEMPO_MEDIO = 15
-TEMPO_DIFICIL = 12
+TEMPO_FACIL = 30  # era 20
+TEMPO_MEDIO = 20  # era 15
+TEMPO_DIFICIL = 15  # era 12

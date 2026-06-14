@@ -1,0 +1,448 @@
+{
+  "facil": [
+    {
+      "pergunta": "Qual e o tipo de dado do valor 42 em Python?",
+      "opcoes": ["int", "float", "str", "bool"],
+      "correta": 0,
+      "explicacao": "42 e um numero inteiro, portanto seu tipo e int."
+    },
+    {
+      "pergunta": "Qual keyword e usada para criar uma funcao em Python?",
+      "opcoes": ["func", "def", "function", "create"],
+      "correta": 1,
+      "explicacao": "Em Python usamos 'def' para definir funcoes."
+    },
+    {
+      "pergunta": "O que o comando print() faz em Python?",
+      "opcoes": [
+        "Le dados do usuario",
+        "Exibe texto na tela",
+        "Cria uma variavel",
+        "Encerra o programa"
+      ],
+      "correta": 1,
+      "explicacao": "print() exibe texto ou valores no terminal."
+    },
+    {
+      "pergunta": "Como se cria uma lista vazia em Python?",
+      "opcoes": ["lista = {}", "lista = ()", "lista = []", "lista = <>"],
+      "correta": 2,
+      "explicacao": "Listas em Python sao criadas com colchetes []."
+    },
+    {
+      "pergunta": "Qual operador e usado para exponenciacao em Python?",
+      "opcoes": ["^", "**", "exp()", "//"],
+      "correta": 1,
+      "explicacao": "O operador ** realiza exponenciacao. Ex: 2**3 = 8."
+    },
+    {
+      "pergunta": "O que e uma variavel em Python?",
+      "opcoes": [
+        "Um tipo de loop",
+        "Um espaco na memoria para guardar valores",
+        "Uma funcao especial",
+        "Um arquivo do sistema"
+      ],
+      "correta": 1,
+      "explicacao": "Variaveis sao espacos na memoria que armazenam valores."
+    },
+    {
+      "pergunta": "Qual funcao le dados digitados pelo usuario?",
+      "opcoes": ["read()", "scan()", "input()", "get()"],
+      "correta": 2,
+      "explicacao": "input() captura o que o usuario digita no terminal."
+    },
+    {
+      "pergunta": "Como se escreve um comentario em Python?",
+      "opcoes": [
+        "// comentario",
+        "/* comentario */",
+        "# comentario",
+        "-- comentario"
+      ],
+      "correta": 2,
+      "explicacao": "Em Python comentarios comecam com o simbolo #."
+    },
+    {
+      "pergunta": "Qual e o resultado de 10 % 3 em Python?",
+      "opcoes": ["3", "1", "0", "2"],
+      "correta": 1,
+      "explicacao": "O operador % retorna o resto da divisao. 10 dividido por 3 da resto 1."
+    },
+    {
+      "pergunta": "O que o comando 'break' faz dentro de um loop?",
+      "opcoes": [
+        "Pula para a proxima iteracao",
+        "Encerra o loop imediatamente",
+        "Reinicia o loop",
+        "Pausa o programa"
+      ],
+      "correta": 1,
+      "explicacao": "break encerra o loop imediatamente, saindo dele."
+    },
+    {
+      "pergunta": "Qual e o valor de len('Python')?",
+      "opcoes": ["5", "6", "7", "4"],
+      "correta": 1,
+      "explicacao": "A string 'Python' tem 6 caracteres, entao len() retorna 6."
+    },
+    {
+      "pergunta": "Como se converte a string '10' para inteiro?",
+      "opcoes": ["str('10')", "float('10')", "int('10')", "num('10')"],
+      "correta": 2,
+      "explicacao": "int() converte uma string numerica para inteiro."
+    },
+    {
+      "pergunta": "Qual estrutura e usada para tomar decisoes em Python?",
+      "opcoes": ["for", "while", "if/else", "def"],
+      "correta": 2,
+      "explicacao": "if/else e a estrutura condicional usada para tomar decisoes."
+    },
+    {
+      "pergunta": "O que e um loop 'for' em Python?",
+      "opcoes": [
+        "Uma funcao recursiva",
+        "Uma estrutura que repete acoes para cada item de uma sequencia",
+        "Um tipo de variavel",
+        "Um operador logico"
+      ],
+      "correta": 1,
+      "explicacao": "O for percorre cada elemento de uma sequencia executando um bloco de codigo."
+    },
+    {
+      "pergunta": "Qual e o tipo de dado de True e False em Python?",
+      "opcoes": ["int", "str", "bool", "float"],
+      "correta": 2,
+      "explicacao": "True e False sao valores booleanos, do tipo bool."
+    }
+  ],
+  "medio": [
+    {
+      "pergunta": "O que e um dicionario em Python?",
+      "opcoes": [
+        "Uma lista ordenada",
+        "Uma estrutura de chave e valor",
+        "Um tipo de loop",
+        "Uma funcao built-in"
+      ],
+      "correta": 1,
+      "explicacao": "Dicionarios armazenam pares de chave:valor. Ex: {'nome': 'Ana'}."
+    },
+    {
+      "pergunta": "Como se acessa o valor de uma chave em um dicionario?",
+      "opcoes": [
+        "dicio(chave)",
+        "dicio[chave]",
+        "dicio{chave}",
+        "dicio.chave()"
+      ],
+      "correta": 1,
+      "explicacao": "Usamos colchetes para acessar valores: dicionario['chave']."
+    },
+    {
+      "pergunta": "O que faz o metodo .append() em uma lista?",
+      "opcoes": [
+        "Remove o ultimo elemento",
+        "Ordena a lista",
+        "Adiciona um elemento ao final",
+        "Limpa a lista"
+      ],
+      "correta": 2,
+      "explicacao": ".append() adiciona um elemento ao final da lista."
+    },
+    {
+      "pergunta": "Qual e a diferenca entre lista e tupla em Python?",
+      "opcoes": [
+        "Nao ha diferenca",
+        "Tuplas sao mutaveis, listas nao",
+        "Listas sao mutaveis, tuplas nao",
+        "Tuplas usam colchetes"
+      ],
+      "correta": 2,
+      "explicacao": "Listas sao mutaveis (podem ser alteradas), tuplas sao imutaveis."
+    },
+    {
+      "pergunta": "O que e uma list comprehension?",
+      "opcoes": [
+        "Um tipo de funcao",
+        "Uma forma compacta de criar listas",
+        "Um metodo de ordenacao",
+        "Um loop while especial"
+      ],
+      "correta": 1,
+      "explicacao": "List comprehension cria listas de forma compacta. Ex: [x*2 for x in range(5)]."
+    },
+    {
+      "pergunta": "O que o comando 'return' faz em uma funcao?",
+      "opcoes": [
+        "Encerra o programa",
+        "Imprime um valor",
+        "Retorna um valor para quem chamou a funcao",
+        "Cria uma variavel global"
+      ],
+      "correta": 2,
+      "explicacao": "return devolve um valor ao codigo que chamou a funcao."
+    },
+    {
+      "pergunta": "Como se abre um arquivo para leitura em Python?",
+      "opcoes": [
+        "open('arquivo', 'w')",
+        "open('arquivo', 'r')",
+        "open('arquivo', 'a')",
+        "open('arquivo', 'x')"
+      ],
+      "correta": 1,
+      "explicacao": "O modo 'r' abre o arquivo para leitura (read)."
+    },
+    {
+      "pergunta": "O que faz o bloco try/except?",
+      "opcoes": [
+        "Cria um loop",
+        "Trata erros sem encerrar o programa",
+        "Define uma funcao",
+        "Importa modulos"
+      ],
+      "correta": 1,
+      "explicacao": "try/except captura erros e permite tratar sem travar o programa."
+    },
+    {
+      "pergunta": "Qual metodo retorna todas as chaves de um dicionario?",
+      "opcoes": [".values()", ".items()", ".keys()", ".get()"],
+      "correta": 2,
+      "explicacao": ".keys() retorna todas as chaves do dicionario."
+    },
+    {
+      "pergunta": "O que e uma funcao recursiva?",
+      "opcoes": [
+        "Uma funcao que chama outra funcao",
+        "Uma funcao que chama a si mesma",
+        "Uma funcao sem parametros",
+        "Uma funcao que retorna lista"
+      ],
+      "correta": 1,
+      "explicacao": "Funcao recursiva e aquela que chama a si mesma para resolver subproblemas."
+    },
+    {
+      "pergunta": "Como se importa um modulo em Python?",
+      "opcoes": [
+        "include modulo",
+        "require modulo",
+        "import modulo",
+        "use modulo"
+      ],
+      "correta": 2,
+      "explicacao": "Usamos 'import' para carregar modulos. Ex: import random."
+    },
+    {
+      "pergunta": "O que e o modulo 'random' em Python?",
+      "opcoes": [
+        "Modulo para matematica avancada",
+        "Modulo para gerar valores aleatorios",
+        "Modulo para leitura de arquivos",
+        "Modulo para graficos"
+      ],
+      "correta": 1,
+      "explicacao": "O modulo random gera numeros e escolhas aleatorias."
+    },
+    {
+      "pergunta": "Qual e a saida de: print(type([1,2,3]))?",
+      "opcoes": [
+        "<class 'tuple'>",
+        "<class 'dict'>",
+        "<class 'list'>",
+        "<class 'set'>"
+      ],
+      "correta": 2,
+      "explicacao": "[1,2,3] e uma lista, entao type() retorna <class 'list'>."
+    },
+    {
+      "pergunta": "O que faz o metodo .split() em uma string?",
+      "opcoes": [
+        "Une duas strings",
+        "Divide a string em uma lista",
+        "Remove espacos",
+        "Converte para maiusculo"
+      ],
+      "correta": 1,
+      "explicacao": ".split() divide a string em partes e retorna uma lista."
+    },
+    {
+      "pergunta": "Como se verifica se uma chave existe em um dicionario?",
+      "opcoes": [
+        "chave in dicio",
+        "dicio.exists(chave)",
+        "dicio.has(chave)",
+        "find(chave, dicio)"
+      ],
+      "correta": 0,
+      "explicacao": "Usamos 'in' para verificar se uma chave existe no dicionario."
+    }
+  ],
+  "dificil": [
+    {
+      "pergunta": "O que e uma classe em Python?",
+      "opcoes": [
+        "Um tipo de lista especial",
+        "Um molde para criar objetos",
+        "Uma funcao com retorno",
+        "Um modulo externo"
+      ],
+      "correta": 1,
+      "explicacao": "Classes sao moldes que definem atributos e metodos para criar objetos."
+    },
+    {
+      "pergunta": "O que e heranca em Orientacao a Objetos?",
+      "opcoes": [
+        "Copiar o codigo de outra classe",
+        "Uma classe filha herdar atributos e metodos da classe mae",
+        "Criar dois objetos iguais",
+        "Importar uma classe de outro arquivo"
+      ],
+      "correta": 1,
+      "explicacao": "Heranca permite que uma classe filha reutilize codigo da classe mae."
+    },
+    {
+      "pergunta": "O que e o metodo __init__ em uma classe Python?",
+      "opcoes": [
+        "Um metodo estatico",
+        "O destrutor da classe",
+        "O construtor chamado ao criar um objeto",
+        "Um metodo privado"
+      ],
+      "correta": 2,
+      "explicacao": "__init__ e o construtor da classe, executado automaticamente ao criar um objeto."
+    },
+    {
+      "pergunta": "O que sao decorators em Python?",
+      "opcoes": [
+        "Comentarios especiais",
+        "Funcoes que modificam o comportamento de outras funcoes",
+        "Tipos de variaveis",
+        "Metodos de classes"
+      ],
+      "correta": 1,
+      "explicacao": "Decorators sao funcoes que envolvem outras funcoes para modificar seu comportamento."
+    },
+    {
+      "pergunta": "O que e um gerador (generator) em Python?",
+      "opcoes": [
+        "Uma lista especial",
+        "Uma funcao que usa yield para retornar valores sob demanda",
+        "Um tipo de dicionario",
+        "Um modulo de numeros"
+      ],
+      "correta": 1,
+      "explicacao": "Geradores usam yield e produzem valores um por vez, economizando memoria."
+    },
+    {
+      "pergunta": "Qual e a diferenca entre '==' e 'is' em Python?",
+      "opcoes": [
+        "Sao identicos",
+        "'==' compara valores, 'is' compara identidade de objeto",
+        "'is' compara valores, '==' compara tipo",
+        "Ambos comparam tipos"
+      ],
+      "correta": 1,
+      "explicacao": "'==' verifica se os valores sao iguais. 'is' verifica se sao o mesmo objeto na memoria."
+    },
+    {
+      "pergunta": "O que e o conceito de 'escopo' em Python?",
+      "opcoes": [
+        "O tamanho de uma lista",
+        "A regiao do codigo onde uma variavel e acessivel",
+        "O tipo de uma variavel",
+        "O numero de parametros de uma funcao"
+      ],
+      "correta": 1,
+      "explicacao": "Escopo define onde uma variavel pode ser acessada: local, global ou built-in."
+    },
+    {
+      "pergunta": "O que faz o comando 'lambda' em Python?",
+      "opcoes": [
+        "Importa um modulo",
+        "Cria uma funcao anonima de uma linha",
+        "Define uma classe",
+        "Cria um loop especial"
+      ],
+      "correta": 1,
+      "explicacao": "lambda cria funcoes anonimas curtas. Ex: dobro = lambda x: x * 2."
+    },
+    {
+      "pergunta": "O que e o modulo 'json' em Python?",
+      "opcoes": [
+        "Modulo para graficos",
+        "Modulo para converter dados Python em formato JSON e vice-versa",
+        "Modulo para banco de dados",
+        "Modulo para redes"
+      ],
+      "correta": 1,
+      "explicacao": "O modulo json permite serializar e desserializar dados no formato JSON."
+    },
+    {
+      "pergunta": "O que e polimorfismo em OOP?",
+      "opcoes": [
+        "Criar multiplas classes iguais",
+        "Objetos de classes diferentes responderem ao mesmo metodo de formas diferentes",
+        "Herdar de multiplas classes",
+        "Encapsular atributos"
+      ],
+      "correta": 1,
+      "explicacao": "Polimorfismo permite que metodos com o mesmo nome se comportem diferente em classes diferentes."
+    },
+    {
+      "pergunta": "O que faz o metodo .get() em um dicionario?",
+      "opcoes": [
+        "Remove uma chave",
+        "Retorna o valor de uma chave sem lancar erro se nao existir",
+        "Adiciona uma chave",
+        "Lista todas as chaves"
+      ],
+      "correta": 1,
+      "explicacao": ".get(chave) retorna o valor ou None se a chave nao existir, sem lancar KeyError."
+    },
+    {
+      "pergunta": "O que e encapsulamento em OOP?",
+      "opcoes": [
+        "Herdar metodos de outra classe",
+        "Esconder detalhes internos e expor apenas o necessario",
+        "Criar multiplos objetos",
+        "Usar funcoes dentro de classes"
+      ],
+      "correta": 1,
+      "explicacao": "Encapsulamento protege os dados internos de um objeto, expondo apenas uma interface."
+    },
+    {
+      "pergunta": "Qual e a diferenca entre metodo de classe e metodo de instancia?",
+      "opcoes": [
+        "Nao ha diferenca",
+        "Metodo de classe recebe cls, metodo de instancia recebe self",
+        "Metodo de instancia recebe cls",
+        "Metodo de classe nao pode acessar atributos"
+      ],
+      "correta": 1,
+      "explicacao": "Metodos de instancia recebem self (o objeto). Metodos de classe recebem cls (a propria classe)."
+    },
+    {
+      "pergunta": "O que e uma excecao em Python?",
+      "opcoes": [
+        "Um tipo de variavel especial",
+        "Um erro que ocorre durante a execucao do programa",
+        "Uma funcao sem retorno",
+        "Um modulo de tratamento"
+      ],
+      "correta": 1,
+      "explicacao": "Excecoes sao erros em tempo de execucao que podem ser capturados com try/except."
+    },
+    {
+      "pergunta": "O que faz o operador * ao desempacotar uma lista em Python?",
+      "opcoes": [
+        "Multiplica todos os elementos",
+        "Expande os elementos da lista como argumentos separados",
+        "Cria uma copia da lista",
+        "Remove duplicatas"
+      ],
+      "correta": 1,
+      "explicacao": "O * desempacota a lista. Ex: print(*[1,2,3]) e equivalente a print(1, 2, 3)."
+    }
+  ]
+}
