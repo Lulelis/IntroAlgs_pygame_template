@@ -287,6 +287,10 @@ Escopo mínimo:
 
 #### > A versão mínima do PyQuiz terá: tela de menu com seleção de dificuldade (Fácil, Médio, Difícil), 15 questões de múltipla escolha carregadas de arquivo, temporizador por questão, sistema de pontuação, feedback visual de acerto/erro, tela de resultado com aproveitamento percentual, e salvamento do ranking em arquivo.
 
+## Recursos externos e assets
+
+ > *Este projeto não utiliza imagens, sons ou fontes externas. Todos os elementos visuais (cards, barras de progresso, textos, formas) são desenhados diretamente via código com as primitivas gráficas do Pygame (`pygame.draw`, `pygame.font.SysFont`). As fontes utilizadas (Segoe UI e Consolas) são fontes padrão do sistema operacional, não arquivos de fonte personalizados incluídos no repositório.*
+
 ## 15. Possíveis melhorias, caso haja tempo
 
 Liste funcionalidades extras que o grupo poderá implementar se conseguir concluir o escopo mínimo.
