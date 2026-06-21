@@ -1,29 +1,34 @@
 # src/jogo.py
-# Loop principal do PyQuiz - Semana 3
+# Loop principal do PyQuiz - Semana 4 (visual estilo dark/web)
 
 import pygame
 
-# src/jogo.py
-# Loop principal do PyQuiz - Semana 3
 from src.config import (
     ALTURA_TELA,
     AMARELO,
+    AMARELO_FUNDO,
     AZUL,
-    AZUL_CLARO,
-    BRANCO,
-    BRANCO_GELO,
+    AZUL_FUNDO,
+    BORDA,
     CAMINHO_QUESTOES,
     CAMINHO_RANKING,
     CAMINHO_RECORDE,
-    CINZA_ESCURO,
     FPS,
+    FUNDO,
+    FUNDO_CARD,
+    FUNDO_CARD_2,
     LARGURA_TELA,
+    ROXO,
     TEMPO_DIFICIL,
     TEMPO_FACIL,
     TEMPO_MEDIO,
+    TEXTO,
+    TEXTO_FRACO,
     TITULO_JOGO,
     VERDE,
+    VERDE_FUNDO,
     VERMELHO,
+    VERMELHO_FUNDO,
 )
 from src.dados import (
     carregar_questoes,
@@ -32,106 +37,210 @@ from src.dados import (
     salvar_recorde,
 )
 from src.funcoes import (
+    calcular_aproveitamento,
     calcular_pontos,
+    jogador_aprovado,
     limitar_valor,
+)
+from src.ui import (
+    anel_pontuacao,
+    barra_progresso,
+    bloco_codigo,
+    caixa_arredondada,
+    chip,
+    desenhar_texto,
+    desenhar_texto_quebrado,
 )
 
 
-def desenhar_texto(tela, texto, tamanho, cor, x, y, centralizado=False):
-    # """Renderiza texto na tela na posição indicada."""
-    fonte = pygame.font.SysFont("arial", tamanho)
-    superficie = fonte.render(texto, True, cor)
-    rect = superficie.get_rect()
-    if centralizado:
-        rect.centerx = x
-    else:
-        rect.x = x
-    rect.y = y
-    tela.blit(superficie, rect)
-
-
+# ── TELA: MENU (estilo cards do protótipo) ──────────────────
 def desenhar_menu(tela, opcao_selecionada):
-    # """Desenha a tela inicial com as opções de dificuldade."""
-    tela.fill(CINZA_ESCURO)
+    tela.fill(FUNDO)
 
-    desenhar_texto(
-        tela, "PyQuiz", 64, AMARELO, LARGURA_TELA // 2, 60, centralizado=True
+    # "logo" no topo, estilo terminal
+    caixa_arredondada(
+        tela, (LARGURA_TELA // 2 - 110, 30, 220, 34), FUNDO_CARD, BORDA, 1, raio=8
     )
+    desenhar_texto(tela, ">_ python", 15, AZUL, LARGURA_TELA // 2 - 95, 39)
+    desenhar_texto(tela, "quiz.py", 15, VERDE, LARGURA_TELA // 2 - 10, 39)
+
     desenhar_texto(
         tela,
         "Quiz de Python",
-        24,
-        AZUL_CLARO,
+        34,
+        TEXTO,
         LARGURA_TELA // 2,
-        140,
+        90,
         centralizado=True,
+        negrito=True,
     )
     desenhar_texto(
         tela,
-        "Escolha a dificuldade:",
-        20,
-        BRANCO,
+        "Escolha a dificuldade e teste seus conhecimentos",
+        15,
+        TEXTO_FRACO,
         LARGURA_TELA // 2,
-        210,
+        130,
         centralizado=True,
     )
 
-    opcoes = [
-        "Facil  (20s por questao)",
-        "Medio  (15s por questao)",
-        "Dificil (12s por questao)",
+    cards = [
+        {
+            "nome": "Facil",
+            "desc": "Variaveis, tipos, loops",
+            "tempo": TEMPO_FACIL,
+            "cor": VERDE,
+            "fundo": VERDE_FUNDO,
+        },
+        {
+            "nome": "Medio",
+            "desc": "Funcoes, listas, dicts",
+            "tempo": TEMPO_MEDIO,
+            "cor": AMARELO,
+            "fundo": AMARELO_FUNDO,
+        },
+        {
+            "nome": "Dificil",
+            "desc": "OOP, erros, avancado",
+            "tempo": TEMPO_DIFICIL,
+            "cor": VERMELHO,
+            "fundo": VERMELHO_FUNDO,
+        },
     ]
-    cores_opcao = [VERDE, AMARELO, VERMELHO]
 
-    for i, (nome, cor) in enumerate(zip(opcoes, cores_opcao)):
-        y = 265 + i * 70
-        cor_fundo = AZUL if i == opcao_selecionada else (60, 60, 60)
-        pygame.draw.rect(tela, cor_fundo, (150, y, 500, 50), border_radius=10)
-        pygame.draw.rect(tela, cor, (150, y, 500, 50), width=2, border_radius=10)
-        desenhar_texto(
-            tela, nome, 22, cor, LARGURA_TELA // 2, y + 13, centralizado=True
+    largura_card = 220
+    altura_card = 150
+    espaco = 20
+    x_inicial = (LARGURA_TELA - (largura_card * 3 + espaco * 2)) // 2
+    y_card = 175
+
+    for i, card in enumerate(cards):
+        x = x_inicial + i * (largura_card + espaco)
+        selecionado = i == opcao_selecionada
+
+        cor_fundo = FUNDO_CARD_2 if selecionado else FUNDO_CARD
+        cor_borda = card["cor"] if selecionado else BORDA
+        espessura = 2 if selecionado else 1
+
+        caixa_arredondada(
+            tela,
+            (x, y_card, largura_card, altura_card),
+            cor_fundo,
+            cor_borda,
+            espessura,
+            raio=14,
         )
 
+        desenhar_texto(
+            tela,
+            card["nome"],
+            20,
+            card["cor"],
+            x + largura_card // 2,
+            y_card + 25,
+            centralizado=True,
+            negrito=True,
+        )
+        desenhar_texto_quebrado(
+            tela,
+            card["desc"],
+            13,
+            TEXTO_FRACO,
+            x + largura_card // 2,
+            y_card + 60,
+            largura_card - 30,
+        )
+        chip(
+            tela,
+            f"{card['tempo']}s por questao",
+            x + 30,
+            y_card + 105,
+            card["cor"],
+            card["fundo"],
+            tamanho=12,
+        )
+
+    # Botão "iniciar"
+    y_botao = y_card + altura_card + 35
+    nome_sel = cards[opcao_selecionada]["nome"]
+    caixa_arredondada(
+        tela, (LARGURA_TELA // 2 - 150, y_botao, 300, 46), FUNDO_CARD, AZUL, 1, raio=10
+    )
     desenhar_texto(
         tela,
-        "Setas UP/DOWN para navegar  |  ENTER para confirmar",
-        15,
-        AZUL_CLARO,
+        f"Iniciar - {nome_sel}",
+        18,
+        AZUL,
         LARGURA_TELA // 2,
-        490,
+        y_botao + 13,
+        centralizado=True,
+        negrito=True,
+    )
+
+    desenhar_texto(
+        tela,
+        "Setas ESQUERDA/DIREITA para navegar  |  ENTER para confirmar",
+        13,
+        TEXTO_FRACO,
+        LARGURA_TELA // 2,
+        y_botao + 70,
         centralizado=True,
     )
     desenhar_texto(
         tela,
         "ESC para sair",
-        14,
-        (150, 150, 150),
+        12,
+        (90, 90, 105),
         LARGURA_TELA // 2,
-        515,
+        y_botao + 92,
         centralizado=True,
     )
 
 
+# ── TELA: PERGUNTA ───────────────────────────────────────────
 def desenhar_pergunta(
     tela,
     numero,
     total,
-    pergunta,
-    opcoes,
+    questao,
     selecionada,
     acertou,
     respondeu,
-    correta,
     tempo_restante,
     tempo_total,
+    pontos,
+    dificuldade_info,
 ):
-    # """Desenha a pergunta atual, alternativas, temporizador e progresso."""
-    tela.fill(CINZA_ESCURO)
+    tela.fill(FUNDO)
+    cor_dif, fundo_dif, nome_dif = dificuldade_info
 
-    # Cabeçalho: questão e pontos
-    desenhar_texto(tela, f"Questao {numero} de {total}", 18, AZUL_CLARO, 20, 12)
+    margem = 40
+    largura_conteudo = LARGURA_TELA - margem * 2
 
-    # Temporizador
+    # Cabeçalho: contador + placar
+    desenhar_texto(tela, f"Questao {numero} de {total}", 14, TEXTO_FRACO, margem, 20)
+    caixa_arredondada(
+        tela, (LARGURA_TELA - margem - 90, 14, 90, 26), VERDE_FUNDO, VERDE, 1, raio=13
+    )
+    desenhar_texto(
+        tela,
+        f"{pontos} pts",
+        13,
+        VERDE,
+        LARGURA_TELA - margem - 45,
+        20,
+        centralizado=True,
+        negrito=True,
+    )
+
+    # Barra de progresso (questões)
+    barra_progresso(
+        tela, margem, 50, largura_conteudo, 6, numero / total, FUNDO_CARD, AZUL, raio=3
+    )
+
+    # Chip de dificuldade + temporizador
+    chip(tela, nome_dif, margem, 68, cor_dif, fundo_dif, tamanho=12)
+
     cor_tempo = (
         VERDE
         if tempo_restante > tempo_total * 0.5
@@ -139,175 +248,336 @@ def desenhar_pergunta(
         if tempo_restante > tempo_total * 0.25
         else VERMELHO
     )
-    desenhar_texto(tela, f"{tempo_restante}s", 22, cor_tempo, LARGURA_TELA - 70, 10)
-
-    # Barra de progresso das questões
-    largura_barra = int((numero / total) * (LARGURA_TELA - 40))
-    pygame.draw.rect(
-        tela, (60, 60, 60), (20, 38, LARGURA_TELA - 40, 8), border_radius=4
+    fundo_tempo = (
+        VERDE_FUNDO
+        if tempo_restante > tempo_total * 0.5
+        else AMARELO_FUNDO
+        if tempo_restante > tempo_total * 0.25
+        else VERMELHO_FUNDO
     )
-    pygame.draw.rect(tela, AZUL, (20, 38, largura_barra, 8), border_radius=4)
-
-    # Barra do temporizador
-    largura_tempo = int((tempo_restante / tempo_total) * (LARGURA_TELA - 40))
-    pygame.draw.rect(
-        tela, (60, 60, 60), (20, 50, LARGURA_TELA - 40, 6), border_radius=4
+    chip(
+        tela,
+        f"{tempo_restante}s",
+        LARGURA_TELA - margem - 60,
+        68,
+        cor_tempo,
+        fundo_tempo,
+        tamanho=12,
     )
-    pygame.draw.rect(tela, cor_tempo, (20, 50, largura_tempo, 6), border_radius=4)
 
-    # Pergunta — quebra linha se for muito longa
-    palavras = pergunta.split()
-    linha1 = ""
-    linha2 = ""
-    for palavra in palavras:
-        if len(linha1) + len(palavra) < 60:
-            linha1 += palavra + " "
-        else:
-            linha2 += palavra + " "
+    y = 110
 
-    desenhar_texto(
-        tela, linha1.strip(), 20, BRANCO_GELO, LARGURA_TELA // 2, 75, centralizado=True
+    # Pergunta
+    desenhar_texto_quebrado(
+        tela,
+        questao["pergunta"],
+        19,
+        TEXTO,
+        LARGURA_TELA // 2,
+        y,
+        largura_conteudo - 20,
+        espacamento=26,
     )
-    if linha2.strip():
-        desenhar_texto(
+    y += 55 if len(questao["pergunta"]) < 55 else 80
+
+    # Bloco de código (se houver)
+    if questao.get("codigo"):
+        bloco_codigo(
             tela,
-            linha2.strip(),
-            20,
-            BRANCO_GELO,
-            LARGURA_TELA // 2,
-            100,
-            centralizado=True,
+            questao["codigo"],
+            margem,
+            y,
+            largura_conteudo,
+            (11, 11, 18),
+            AZUL,
+            TEXTO,
+            tamanho=15,
         )
+        num_linhas = len(questao["codigo"].split("\n"))
+        y += (15 + 8) * num_linhas + 20 + 15
 
     # Alternativas
     letras = ["A", "B", "C", "D"]
-    for i, (letra, opcao) in enumerate(zip(letras, opcoes)):
-        y = 145 + i * 88
+    altura_opt = 50
+    espaco_opt = 10
+
+    for i, (letra, opcao) in enumerate(zip(letras, questao["opcoes"])):
+        rect = (margem, y, largura_conteudo, altura_opt)
 
         if respondeu:
-            if i == correta:
-                cor_fundo = (0, 80, 0)
-                cor_borda = VERDE
+            if i == questao["correta"]:
+                cor_fundo, cor_borda, cor_txt = VERDE_FUNDO, VERDE, VERDE
             elif i == selecionada:
-                cor_fundo = (100, 0, 0)
-                cor_borda = VERMELHO
+                cor_fundo, cor_borda, cor_txt = VERMELHO_FUNDO, VERMELHO, VERMELHO
             else:
-                cor_fundo = (50, 50, 50)
-                cor_borda = (80, 80, 80)
+                cor_fundo, cor_borda, cor_txt = FUNDO_CARD, BORDA, TEXTO_FRACO
         else:
-            cor_fundo = AZUL if i == selecionada else (50, 50, 50)
-            cor_borda = AZUL_CLARO if i == selecionada else (80, 80, 80)
+            if i == selecionada:
+                cor_fundo, cor_borda, cor_txt = FUNDO_CARD_2, AZUL, TEXTO
+            else:
+                cor_fundo, cor_borda, cor_txt = FUNDO_CARD, BORDA, TEXTO
 
-        pygame.draw.rect(tela, cor_fundo, (40, y, 720, 75), border_radius=8)
-        pygame.draw.rect(tela, cor_borda, (40, y, 720, 75), width=2, border_radius=8)
-        desenhar_texto(tela, f"{letra})  {opcao}", 18, BRANCO, 65, y + 26)
-
-    # Mensagem de feedback
-    if respondeu:
-        msg = (
-            "Correto!  ENTER para continuar"
-            if acertou
-            else "Errou!  ENTER para continuar"
+        caixa_arredondada(
+            tela,
+            rect,
+            cor_fundo,
+            cor_borda,
+            2 if (i == selecionada or (respondeu and i == questao["correta"])) else 1,
+            raio=10,
         )
-        cor_msg = VERDE if acertou else VERMELHO
+
+        # "letra" estilo badge
+        caixa_arredondada(
+            tela,
+            (margem + 10, y + 13, 24, 24),
+            FUNDO_CARD_2 if not respondeu else cor_borda,
+            raio=5,
+        )
+        cor_letra = (
+            TEXTO_FRACO
+            if not respondeu
+            else (FUNDO if i in (selecionada, questao["correta"]) else TEXTO_FRACO)
+        )
         desenhar_texto(
-            tela, msg, 17, cor_msg, LARGURA_TELA // 2, 510, centralizado=True
+            tela,
+            letra,
+            12,
+            cor_letra,
+            margem + 22,
+            y + 19,
+            centralizado=True,
+            negrito=True,
         )
+
+        desenhar_texto(tela, opcao, 15, cor_txt, margem + 48, y + 17)
+
+        y += altura_opt + espaco_opt
+
+    # Feedback final
+    y += 8
+    if respondeu:
+        if acertou:
+            desenhar_texto(
+                tela,
+                "Correto!  Pressione ENTER para continuar",
+                14,
+                VERDE,
+                LARGURA_TELA // 2,
+                y,
+                centralizado=True,
+                negrito=True,
+            )
+        else:
+            desenhar_texto(
+                tela,
+                "Incorreto.  Pressione ENTER para continuar",
+                14,
+                VERMELHO,
+                LARGURA_TELA // 2,
+                y,
+                centralizado=True,
+                negrito=True,
+            )
+        if questao.get("explicacao"):
+            desenhar_texto_quebrado(
+                tela,
+                questao["explicacao"],
+                12,
+                TEXTO_FRACO,
+                LARGURA_TELA // 2,
+                y + 22,
+                largura_conteudo - 40,
+                espacamento=18,
+            )
     else:
         desenhar_texto(
             tela,
-            "Setas UP/DOWN para navegar  |  ENTER para responder",
-            14,
-            AZUL_CLARO,
+            "Setas CIMA/BAIXO para escolher  |  ENTER para responder",
+            12,
+            TEXTO_FRACO,
             LARGURA_TELA // 2,
-            510,
+            y,
             centralizado=True,
         )
 
 
+# ── TELA: RESULTADO ──────────────────────────────────────────
 def desenhar_resultado(
-    tela, pontos, total_acertos, total_questoes, recorde, dificuldade
+    tela,
+    pontos,
+    total_acertos,
+    total_questoes,
+    recorde,
+    dificuldade_info,
+    opcao_selecionada,
 ):
-    # """Desenha a tela de resultado final com aproveitamento."""
-    tela.fill(CINZA_ESCURO)
+    tela.fill(FUNDO)
+    cor_dif, fundo_dif, nome_dif = dificuldade_info
 
-    aproveitamento = int((total_acertos / total_questoes) * 100)
-    aprovado = aproveitamento >= 70
+    aproveitamento = calcular_aproveitamento(total_acertos, total_questoes)
+    aprovado = jogador_aprovado(total_acertos, total_questoes)
 
+    cor_anel = VERDE if aprovado else (AMARELO if aproveitamento >= 40 else VERMELHO)
+    fundo_anel = (
+        VERDE_FUNDO
+        if aprovado
+        else (AMARELO_FUNDO if aproveitamento >= 40 else VERMELHO_FUNDO)
+    )
+
+    centro_x = LARGURA_TELA // 2
+
+    anel_pontuacao(
+        tela,
+        centro_x,
+        130,
+        64,
+        f"{total_acertos}/{total_questoes}",
+        "acertos",
+        cor_anel,
+        fundo_anel,
+    )
+
+    titulo = "Excelente!" if aprovado else "Continue praticando!"
     desenhar_texto(
-        tela, "Resultado Final", 42, AMARELO, LARGURA_TELA // 2, 60, centralizado=True
+        tela, titulo, 24, TEXTO, centro_x, 215, centralizado=True, negrito=True
     )
     desenhar_texto(
         tela,
-        f"Dificuldade: {dificuldade.capitalize()}",
-        18,
-        AZUL_CLARO,
-        LARGURA_TELA // 2,
-        120,
+        f"Aproveitamento de {aproveitamento}%",
+        14,
+        TEXTO_FRACO,
+        centro_x,
+        248,
         centralizado=True,
     )
 
+    chip(tela, nome_dif, centro_x - 35, 278, cor_dif, fundo_dif, tamanho=12)
+
+    # Cards de estatística
+    y_cards = 330
+    largura_card = 220
+    espaco = 20
+    x_inicial = (LARGURA_TELA - (largura_card * 2 + espaco)) // 2
+
+    caixa_arredondada(
+        tela, (x_inicial, y_cards, largura_card, 80), FUNDO_CARD, BORDA, 1, raio=12
+    )
     desenhar_texto(
         tela,
-        f"Acertos: {total_acertos} de {total_questoes}",
-        26,
-        BRANCO,
-        LARGURA_TELA // 2,
-        165,
+        "Pontuacao",
+        12,
+        TEXTO_FRACO,
+        x_inicial + largura_card // 2,
+        y_cards + 16,
         centralizado=True,
     )
     desenhar_texto(
         tela,
-        f"Aproveitamento: {aproveitamento}%",
-        24,
-        BRANCO,
-        LARGURA_TELA // 2,
-        205,
-        centralizado=True,
-    )
-    desenhar_texto(
-        tela,
-        f"Pontuacao: {pontos}",
+        str(pontos),
         28,
-        AMARELO,
-        LARGURA_TELA // 2,
-        250,
+        AZUL,
+        x_inicial + largura_card // 2,
+        y_cards + 36,
+        centralizado=True,
+        negrito=True,
+    )
+
+    x2 = x_inicial + largura_card + espaco
+    caixa_arredondada(
+        tela, (x2, y_cards, largura_card, 80), FUNDO_CARD, BORDA, 1, raio=12
+    )
+    desenhar_texto(
+        tela,
+        "Recorde",
+        12,
+        TEXTO_FRACO,
+        x2 + largura_card // 2,
+        y_cards + 16,
         centralizado=True,
     )
     desenhar_texto(
         tela,
-        f"Recorde: {recorde}",
-        20,
-        AZUL_CLARO,
-        LARGURA_TELA // 2,
-        290,
+        str(recorde),
+        28,
+        ROXO,
+        x2 + largura_card // 2,
+        y_cards + 36,
         centralizado=True,
+        negrito=True,
     )
 
-    msg = "APROVADO! Parabens!" if aprovado else "Tente novamente!"
-    cor = VERDE if aprovado else VERMELHO
-    desenhar_texto(tela, msg, 30, cor, LARGURA_TELA // 2, 340, centralizado=True)
+    # Botões
+    # Botões (destaca o selecionado)
+    y_botoes = y_cards + 110
+
+    if opcao_selecionada == 0:
+        caixa_arredondada(
+            tela, (x_inicial, y_botoes, largura_card, 46), AZUL_FUNDO, AZUL, 2, raio=10
+        )
+        desenhar_texto(
+            tela,
+            "Jogar de novo",
+            15,
+            AZUL,
+            x_inicial + largura_card // 2,
+            y_botoes + 14,
+            centralizado=True,
+            negrito=True,
+        )
+    else:
+        caixa_arredondada(
+            tela, (x_inicial, y_botoes, largura_card, 46), FUNDO_CARD, BORDA, 1, raio=10
+        )
+        desenhar_texto(
+            tela,
+            "Jogar de novo",
+            15,
+            TEXTO_FRACO,
+            x_inicial + largura_card // 2,
+            y_botoes + 14,
+            centralizado=True,
+        )
+
+    if opcao_selecionada == 1:
+        caixa_arredondada(
+            tela, (x2, y_botoes, largura_card, 46), FUNDO_CARD_2, AZUL, 2, raio=10
+        )
+        desenhar_texto(
+            tela,
+            "Voltar ao menu",
+            15,
+            TEXTO,
+            x2 + largura_card // 2,
+            y_botoes + 14,
+            centralizado=True,
+            negrito=True,
+        )
+    else:
+        caixa_arredondada(
+            tela, (x2, y_botoes, largura_card, 46), FUNDO_CARD, BORDA, 1, raio=10
+        )
+        desenhar_texto(
+            tela,
+            "Voltar ao menu",
+            15,
+            TEXTO_FRACO,
+            x2 + largura_card // 2,
+            y_botoes + 14,
+            centralizado=True,
+        )
 
     desenhar_texto(
         tela,
-        "ENTER para jogar novamente",
-        18,
-        AZUL_CLARO,
-        LARGURA_TELA // 2,
-        430,
-        centralizado=True,
-    )
-    desenhar_texto(
-        tela,
-        "ESC para voltar ao menu",
-        16,
-        (150, 150, 150),
-        LARGURA_TELA // 2,
-        460,
+        "Setas para escolher  |  ENTER para confirmar",
+        12,
+        TEXTO_FRACO,
+        centro_x,
+        y_botoes + 70,
         centralizado=True,
     )
 
 
+# ── LOOP PRINCIPAL ───────────────────────────────────────────
 def executar_jogo():
     """Executa o loop principal do PyQuiz."""
     pygame.init()
@@ -316,14 +586,14 @@ def executar_jogo():
     relogio = pygame.time.Clock()
     pygame.display.set_caption(TITULO_JOGO)
 
-    # Mapeamento de dificuldade
     nomes_dificuldade = ["facil", "medio", "dificil"]
     tempos_dificuldade = [TEMPO_FACIL, TEMPO_MEDIO, TEMPO_DIFICIL]
+    cores_dificuldade = [VERDE, AMARELO, VERMELHO]
+    fundos_dificuldade = [VERDE_FUNDO, AMARELO_FUNDO, VERMELHO_FUNDO]
+    labels_dificuldade = ["Facil", "Medio", "Dificil"]
 
-    # Carrega recorde salvo
     recorde = carregar_recorde(CAMINHO_RECORDE)
 
-    # Estado do jogo
     estado = "menu"
     opcao_menu = 0
     dificuldade = "facil"
@@ -337,53 +607,57 @@ def executar_jogo():
     pontos = 0
     total_acertos = 0
 
-    # Temporizador
     tempo_restante = tempo_questao
     ultimo_tick = 0
+    opcao_fim = 0
 
     rodando = True
+
+    def iniciar_partida():
+        nonlocal dificuldade, tempo_questao, questoes, indice_questao
+        nonlocal opcao_resposta, respondeu, pontos, total_acertos
+        nonlocal tempo_restante, ultimo_tick, estado, acertou, opcao_fim
+
+        dificuldade = nomes_dificuldade[opcao_menu]
+        tempo_questao = tempos_dificuldade[opcao_menu]
+        questoes = carregar_questoes(CAMINHO_QUESTOES, dificuldade)
+        indice_questao = 0
+        opcao_resposta = 0
+        respondeu = False
+        acertou = False
+        pontos = 0
+        total_acertos = 0
+        tempo_restante = tempo_questao
+        ultimo_tick = pygame.time.get_ticks()
+        estado = "jogando"
+        opcao_fim = 0
 
     while rodando:
         relogio.tick(FPS)
         tempo_atual = pygame.time.get_ticks()
 
-        # ── Temporizador (só conta durante a pergunta) ──
         if estado == "jogando" and not respondeu:
             if tempo_atual - ultimo_tick >= 1000:
                 tempo_restante -= 1
                 ultimo_tick = tempo_atual
                 if tempo_restante <= 0:
-                    # Tempo esgotado = erro
                     respondeu = True
                     acertou = False
                     opcao_resposta = -1
 
-        # ── Eventos ─────────────────────────────────────
         for evento in pygame.event.get():
             if evento.type == pygame.QUIT:
                 rodando = False
 
             if evento.type == pygame.KEYDOWN:
-                # --- Menu ---
                 if estado == "menu":
-                    if evento.key == pygame.K_UP:
+                    if evento.key in (pygame.K_LEFT, pygame.K_UP):
                         opcao_menu = limitar_valor(opcao_menu - 1, 0, 2)
-                    if evento.key == pygame.K_DOWN:
+                    if evento.key in (pygame.K_RIGHT, pygame.K_DOWN):
                         opcao_menu = limitar_valor(opcao_menu + 1, 0, 2)
                     if evento.key == pygame.K_RETURN:
-                        dificuldade = nomes_dificuldade[opcao_menu]
-                        tempo_questao = tempos_dificuldade[opcao_menu]
-                        questoes = carregar_questoes(CAMINHO_QUESTOES, dificuldade)
-                        indice_questao = 0
-                        opcao_resposta = 0
-                        respondeu = False
-                        pontos = 0
-                        total_acertos = 0
-                        tempo_restante = tempo_questao
-                        ultimo_tick = pygame.time.get_ticks()
-                        estado = "jogando"
+                        iniciar_partida()
 
-                # --- Jogando ---
                 elif estado == "jogando":
                     if not respondeu:
                         if evento.key == pygame.K_UP:
@@ -395,14 +669,12 @@ def executar_jogo():
                             acertou = opcao_resposta == correta
                             respondeu = True
                             if acertou:
-                                bonus = tempo_restante
-                                pontos = calcular_pontos(pontos, 10 + bonus)
+                                pontos = calcular_pontos(pontos, 10 + tempo_restante)
                                 total_acertos += 1
                     else:
                         if evento.key == pygame.K_RETURN:
                             indice_questao += 1
                             if indice_questao >= len(questoes):
-                                # Fim do jogo
                                 if pontos > recorde:
                                     recorde = pontos
                                     salvar_recorde(CAMINHO_RECORDE, recorde)
@@ -410,6 +682,7 @@ def executar_jogo():
                                     CAMINHO_RANKING, "Jogador", pontos, dificuldade
                                 )
                                 estado = "fim"
+                                opcao_fim = 0
                             else:
                                 opcao_resposta = 0
                                 respondeu = False
@@ -417,22 +690,21 @@ def executar_jogo():
                                 tempo_restante = tempo_questao
                                 ultimo_tick = pygame.time.get_ticks()
 
-                # --- Fim ---
                 elif estado == "fim":
+                    if evento.key in (
+                        pygame.K_LEFT,
+                        pygame.K_RIGHT,
+                        pygame.K_UP,
+                        pygame.K_DOWN,
+                    ):
+                        opcao_fim = 1 - opcao_fim
                     if evento.key == pygame.K_RETURN:
-                        dificuldade = nomes_dificuldade[opcao_menu]
-                        tempo_questao = tempos_dificuldade[opcao_menu]
-                        questoes = carregar_questoes(CAMINHO_QUESTOES, dificuldade)
-                        indice_questao = 0
-                        opcao_resposta = 0
-                        respondeu = False
-                        pontos = 0
-                        total_acertos = 0
-                        tempo_restante = tempo_questao
-                        ultimo_tick = pygame.time.get_ticks()
-                        estado = "jogando"
+                        if opcao_fim == 0:
+                            iniciar_partida()
+                        else:
+                            estado = "menu"
+                            opcao_menu = 0
 
-                # ESC sempre volta ao menu
                 if evento.key == pygame.K_ESCAPE:
                     if estado == "menu":
                         rodando = False
@@ -440,32 +712,43 @@ def executar_jogo():
                         estado = "menu"
                         opcao_menu = 0
 
-        # -------------Renderização ------------
+        # ── Renderização ──
         if estado == "menu":
             desenhar_menu(tela, opcao_menu)
 
         elif estado == "jogando":
-            q = questoes[indice_questao]
+            idx = nomes_dificuldade.index(dificuldade)
+            info_dif = (
+                cores_dificuldade[idx],
+                fundos_dificuldade[idx],
+                labels_dificuldade[idx],
+            )
             desenhar_pergunta(
                 tela,
                 indice_questao + 1,
                 len(questoes),
-                q["pergunta"],
-                q["opcoes"],
+                questoes[indice_questao],
                 opcao_resposta,
                 acertou,
                 respondeu,
-                q["correta"],
                 tempo_restante,
                 tempo_questao,
+                pontos,
+                info_dif,
             )
             pygame.display.set_caption(
                 f"{TITULO_JOGO} | Pontos: {pontos} | Recorde: {recorde}"
             )
 
         elif estado == "fim":
+            idx = nomes_dificuldade.index(dificuldade)
+            info_dif = (
+                cores_dificuldade[idx],
+                fundos_dificuldade[idx],
+                labels_dificuldade[idx],
+            )
             desenhar_resultado(
-                tela, pontos, total_acertos, len(questoes), recorde, dificuldade
+                tela, pontos, total_acertos, len(questoes), recorde, info_dif, opcao_fim
             )
 
         pygame.display.flip()

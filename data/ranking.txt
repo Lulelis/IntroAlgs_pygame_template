@@ -1,1 +1,6 @@
 Jogador;100;dificil
+Jogador;189;dificil
+Jogador;0;dificil
+Jogador;252;medio
+Jogador;40;facil
+Jogador;59;medio
