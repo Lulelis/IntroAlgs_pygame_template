@@ -47,16 +47,19 @@ from src.ui import (
     barra_progresso,
     bloco_codigo,
     caixa_arredondada,
+    caixa_com_sombra,
     chip,
+    cor_interpolada,
     desenhar_texto,
     desenhar_texto_quebrado,
+    pulso,
 )
 
 
 # ── TELA: MENU (estilo cards do protótipo) ──────────────────
 def desenhar_menu(tela, opcao_selecionada):
     tela.fill(FUNDO)
-
+    ####
     # "logo" no topo, estilo terminal
     caixa_arredondada(
         tela, (LARGURA_TELA // 2 - 110, 30, 220, 34), FUNDO_CARD, BORDA, 1, raio=8
@@ -122,14 +125,7 @@ def desenhar_menu(tela, opcao_selecionada):
         cor_borda = card["cor"] if selecionado else BORDA
         espessura = 2 if selecionado else 1
 
-        caixa_arredondada(
-            tela,
-            (x, y_card, largura_card, altura_card),
-            cor_fundo,
-            cor_borda,
-            espessura,
-            raio=14,
-        )
+        caixa_com_sombra(tela, (x, y_card, largura_card, altura_card), cor_fundo, cor_borda, espessura, raio=14)
 
         desenhar_texto(
             tela,
@@ -255,6 +251,12 @@ def desenhar_pergunta(
         if tempo_restante > tempo_total * 0.25
         else VERMELHO_FUNDO
     )
+
+    # Efeito pulsante quando o tempo esta acabando (urgencia)
+    if tempo_restante <= tempo_total * 0.25 and tempo_restante > 0:
+        fator = pulso(velocidade=5)
+        cor_tempo = cor_interpolada(VERMELHO, (255, 255, 255), fator * 0.4)
+
     chip(
         tela,
         f"{tempo_restante}s",
@@ -459,7 +461,7 @@ def desenhar_resultado(
     espaco = 20
     x_inicial = (LARGURA_TELA - (largura_card * 2 + espaco)) // 2
 
-    caixa_arredondada(
+    caixa_com_sombra(
         tela, (x_inicial, y_cards, largura_card, 80), FUNDO_CARD, BORDA, 1, raio=12
     )
     desenhar_texto(
@@ -483,7 +485,7 @@ def desenhar_resultado(
     )
 
     x2 = x_inicial + largura_card + espaco
-    caixa_arredondada(
+    caixa_com_sombra(
         tela, (x2, y_cards, largura_card, 80), FUNDO_CARD, BORDA, 1, raio=12
     )
     desenhar_texto(

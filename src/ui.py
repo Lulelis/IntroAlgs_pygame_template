@@ -1,6 +1,8 @@
 # src/ui.py
 # Funções de interface visual do PyQuiz (estilo dark moderno)
 
+import math
+
 import pygame
 
 _FONTE_CACHE = {}
@@ -141,3 +143,35 @@ def anel_pontuacao(
         centro_y + 12,
         centralizado=True,
     )
+
+
+def sombra_caixa(tela, rect, raio=12, intensidade=40):
+    """Desenha uma sombra sutil por baixo de um card (efeito de profundidade)."""
+    x, y, largura, altura = rect
+    sombra_surf = pygame.Surface((largura + 8, altura + 8), pygame.SRCALPHA)
+    pygame.draw.rect(
+        sombra_surf, (0, 0, 0, intensidade), (4, 6, largura, altura), border_radius=raio
+    )
+    tela.blit(sombra_surf, (x - 4, y - 2))
+
+
+def caixa_com_sombra(tela, rect, cor_fundo, cor_borda=None, espessura_borda=0, raio=12):
+    """Card com sombra sutil por baixo, estilo material design."""
+    sombra_caixa(tela, rect, raio=raio)
+    caixa_arredondada(tela, rect, cor_fundo, cor_borda, espessura_borda, raio)
+
+
+def pulso(velocidade=4):
+    """Retorna um valor entre 0.0 e 1.0 que oscila com o tempo (efeito pulsante)."""
+    return (math.sin(pygame.time.get_ticks() / 1000 * velocidade) + 1) / 2
+
+
+def cor_interpolada(cor_a, cor_b, fator):
+    """Mistura duas cores RGB de acordo com um fator de 0.0 a 1.0."""
+    fator = max(0.0, min(1.0, fator))
+    return tuple(int(a + (b - a) * fator) for a, b in zip(cor_a, cor_b))
+
+
+def linha_divisoria(tela, x, y, largura, cor, espessura=1):
+    """Desenha uma linha horizontal sutil (separador visual)."""
+    pygame.draw.rect(tela, cor, (x, y, largura, espessura))
