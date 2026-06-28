@@ -300,10 +300,27 @@ def desenhar_pergunta(
 
     # Alternativas
     letras = ["A", "B", "C", "D"]
-    altura_opt = 50
     espaco_opt = 10
+    largura_texto_opt = largura_conteudo - 70  # espaço disponível para o texto, descontando o badge da letra
+
+    fonte_opt = pygame.font.SysFont("segoeui", 15)
 
     for i, (letra, opcao) in enumerate(zip(letras, questao["opcoes"])):
+        # Calcula quantas linhas o texto vai ocupar para definir a altura da caixa
+        palavras = opcao.split(" ")
+        linhas_opt = []
+        linha_atual = ""
+        for palavra in palavras:
+            teste = (linha_atual + " " + palavra).strip()
+            if fonte_opt.size(teste)[0] <= largura_texto_opt:
+                linha_atual = teste
+            else:
+                linhas_opt.append(linha_atual)
+                linha_atual = palavra
+        if linha_atual:
+            linhas_opt.append(linha_atual)
+
+        altura_opt = max(50, 24 + len(linhas_opt) * 20)
         rect = (margem, y, largura_conteudo, altura_opt)
 
         if respondeu:
@@ -351,7 +368,7 @@ def desenhar_pergunta(
             negrito=True,
         )
 
-        desenhar_texto(tela, opcao, 15, cor_txt, margem + 48, y + 17)
+        desenhar_texto_quebrado(tela, opcao, 15, cor_txt, margem + 48, y + 16, largura_texto_opt, centralizado=False, espacamento=20)
 
         y += altura_opt + espaco_opt
 
@@ -622,7 +639,8 @@ def executar_jogo():
 
         dificuldade = nomes_dificuldade[opcao_menu]
         tempo_questao = tempos_dificuldade[opcao_menu]
-        questoes = carregar_questoes(CAMINHO_QUESTOES, dificuldade)
+        questoes_disponiveis = carregar_questoes(CAMINHO_QUESTOES, dificuldade)
+        questoes = questoes_disponiveis[:20]
         indice_questao = 0
         opcao_resposta = 0
         respondeu = False

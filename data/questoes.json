@@ -2,214 +2,374 @@
   "facil": [
     {
       "pergunta": "Em um programa que pede uma sequência de números até o usuário digitar 0, o valor 0 deve ser considerado parte da sequência?",
-      "opcoes": ["Sim, sempre", "Não, ele é apenas o sinal de parada (sentinela)", "Depende do sistema operacional", "Só se for o primeiro valor digitado"],
+      "opcoes": [
+        "Depende do sistema operacional",
+        "Não, ele é apenas o sinal de parada (sentinela)",
+        "Só se for o primeiro valor digitado",
+        "Sim, sempre"
+      ],
       "correta": 1,
       "explicacao": "Um valor sentinela (como 0) serve apenas para indicar o fim da leitura e não deve ser processado como dado da sequência."
     },
     {
       "pergunta": "Qual é a saída do código abaixo?",
       "codigo": "n = 6\ni = 0\n\nwhile i < n:\n    if i % 2 == 0:\n        n = n - 1\n    i += 1\n\nprint(i, n)",
-      "opcoes": ["6 6", "5 4", "4 4", "3 3"],
-      "correta": 2,
+      "opcoes": [
+        "3 3",
+        "4 4",
+        "6 6",
+        "5 4"
+      ],
+      "correta": 1,
       "explicacao": "Passo a passo: (i=1,n=5), (i=2,n=5), (i=3,n=4), (i=4,n=4) — nesse ponto i=4 não é mais menor que n=4, e o laço para. Saída final: 4 4."
     },
     {
       "pergunta": "No trecho abaixo, qual é a saída impressa e por quê?",
       "codigo": "x = 0\ny = 10\n\nif x != 0 and y / x > 1:\n    print('A')\nelse:\n    print('B')",
-      "opcoes": ["Erro de divisão por zero", "'A', porque x é diferente de 0", "'B', pois o curto-circuito do 'and' evita a divisão", "'B', mas o programa trava antes"],
+      "opcoes": [
+        "'A', porque x é diferente de 0",
+        "'B', mas o programa trava antes",
+        "'B', pois o curto-circuito do 'and' evita a divisão",
+        "Erro de divisão por zero"
+      ],
       "correta": 2,
       "explicacao": "Como x != 0 é False, o Python usa avaliação de curto-circuito e nem chega a calcular y/x, evitando o erro e imprimindo 'B'."
     },
     {
       "pergunta": "Em uma estrutura de repetição, qual cuidado é fundamental para evitar um loop infinito?",
-      "opcoes": ["Usar apenas o for, nunca o while", "Garantir que a condição de parada eventualmente se torne falsa", "Declarar todas as variáveis como inteiras", "Usar sempre range() em vez de while"],
-      "correta": 1,
+      "opcoes": [
+        "Garantir que a condição de parada eventualmente se torne falsa",
+        "Declarar todas as variáveis como inteiras",
+        "Usar apenas o for, nunca o while",
+        "Usar sempre range() em vez de while"
+      ],
+      "correta": 0,
       "explicacao": "Um loop infinito ocorre quando a condição de parada nunca é alcançada; é essencial garantir que a variável de controle avance em direção à condição de parada."
     },
     {
       "pergunta": "Qual é o valor final de 'total' no código abaixo?",
       "codigo": "total = 0\ni = 1\nwhile i <= 5:\n    total += i\n    if total > 6:\n        i += 2\n    else:\n        i += 1\nprint(total)",
-      "opcoes": ["10", "15", "11", "21"],
-      "correta": 0,
+      "opcoes": [
+        "15",
+        "11",
+        "21",
+        "10"
+      ],
+      "correta": 3,
       "explicacao": "A sequência é: i=1 (total=1), i=2 (total=3), i=3 (total=6), i=4 (total=10, e como 10>6 o i salta para 6, encerrando o while). Total final = 10."
     },
     {
       "pergunta": "No código abaixo, qual é o problema na lógica para encontrar o maior valor digitado?",
       "codigo": "maior = 0\nn = int(input())\nwhile n != 0:\n    if n > maior:\n        maior = n\n    n = int(input())\nprint(maior)",
-      "opcoes": ["Não há problema, está correto", "Falha se todos os valores digitados forem negativos", "O 'while' nunca executa", "Falta o 'else' no if"],
-      "correta": 1,
+      "opcoes": [
+        "Falha se todos os valores digitados forem negativos",
+        "Falta o 'else' no if",
+        "O 'while' nunca executa",
+        "Não há problema, está correto"
+      ],
+      "correta": 0,
       "explicacao": "Inicializar 'maior' com 0 é um erro se todos os números digitados forem negativos, pois 0 sempre seria maior que eles. O correto é inicializar com o primeiro valor lido."
     },
     {
       "pergunta": "O que representa uma 'condição de parada' (sentinela) em um laço de leitura contínua?",
-      "opcoes": ["O primeiro valor lido pelo programa", "Um valor especial que indica o fim da entrada de dados", "A quantidade máxima de repetições do for", "Um erro de sintaxe no código"],
+      "opcoes": [
+        "A quantidade máxima de repetições do for",
+        "Um valor especial que indica o fim da entrada de dados",
+        "O primeiro valor lido pelo programa",
+        "Um erro de sintaxe no código"
+      ],
       "correta": 1,
       "explicacao": "A sentinela é um valor combinado (como 0 ou uma palavra como 'fim') usado para sinalizar que a leitura de dados deve parar."
     },
     {
       "pergunta": "Por que, em problemas com decisões, é importante analisar se as condições são independentes ou mutuamente exclusivas?",
-      "opcoes": ["Para decidir entre usar 'if' encadeado ou múltiplos 'if's separados, evitando saídas indesejadas", "Porque o Python exige isso por sintaxe", "Apenas por questão de estilo de código", "Não tem nenhuma importância prática"],
-      "correta": 0,
+      "opcoes": [
+        "Porque o Python exige isso por sintaxe",
+        "Não tem nenhuma importância prática",
+        "Para decidir entre usar 'if' encadeado ou múltiplos 'if's separados, evitando saídas indesejadas",
+        "Apenas por questão de estilo de código"
+      ],
+      "correta": 2,
       "explicacao": "Usar dois 'if's separados quando as condições deveriam ser mutuamente exclusivas (elif) pode causar a execução de mais de um bloco, gerando saídas inesperadas."
     },
     {
       "pergunta": "Qual é a saída deste código com 'if' encadeado (não exclusivo) para n = 70?",
       "codigo": "n = 70\nif n >= 60:\n    print('A')\nif n >= 40:\n    print('B')\nelse:\n    print('C')",
-      "opcoes": ["Apenas 'A'", "'A' e 'B'", "Apenas 'B'", "'A' e 'C'"],
-      "correta": 1,
+      "opcoes": [
+        "Apenas 'A'",
+        "Apenas 'B'",
+        "'A' e 'B'",
+        "'A' e 'C'"
+      ],
+      "correta": 2,
       "explicacao": "Como são dois 'if's independentes (não elif), ambas as condições são avaliadas separadamente. Como n=70 satisfaz as duas, 'A' e 'B' são impressos."
     },
     {
       "pergunta": "Para calcular potência (base elevada a expoente) manualmente com um 'for', sem usar o operador **, qual é a estratégia correta?",
-      "opcoes": ["Somar a base 'expoente' vezes", "Multiplicar um acumulador pela base, 'expoente' vezes, dentro do loop", "Usar apenas divisões sucessivas", "Não é possível fazer isso sem o operador **"],
-      "correta": 1,
+      "opcoes": [
+        "Usar apenas divisões sucessivas",
+        "Não é possível fazer isso sem o operador **",
+        "Somar a base 'expoente' vezes",
+        "Multiplicar um acumulador pela base, 'expoente' vezes, dentro do loop"
+      ],
+      "correta": 3,
       "explicacao": "A potência pode ser calculada multiplicando um acumulador inicializado em 1 pela base repetidamente, uma vez para cada unidade do expoente."
     },
     {
       "pergunta": "Para verificar se um número inteiro positivo é primo usando 'while', qual é a lógica básica?",
-      "opcoes": ["Verificar se ele é divisível apenas por 1", "Testar se ele tem algum divisor entre 2 e ele mesmo menos 1", "Verificar apenas se é par ou ímpar", "Somar todos os números menores que ele"],
+      "opcoes": [
+        "Verificar apenas se é par ou ímpar",
+        "Testar se ele tem algum divisor entre 2 e ele mesmo menos 1",
+        "Somar todos os números menores que ele",
+        "Verificar se ele é divisível apenas por 1"
+      ],
       "correta": 1,
       "explicacao": "Um número é primo se não tiver nenhum divisor inteiro além de 1 e ele mesmo; o teste percorre possíveis divisores a partir de 2."
     },
     {
       "pergunta": "Em um programa que classifica entregas como 'adiantada', 'no prazo' ou 'atrasada', qual estrutura é mais adequada?",
-      "opcoes": ["Apenas um 'while'", "Estruturas condicionais (if/elif/else) comparando tempo previsto e tempo gasto", "Apenas um 'for' sem condicionais", "Não é possível resolver isso com Python básico"],
-      "correta": 1,
+      "opcoes": [
+        "Não é possível resolver isso com Python básico",
+        "Apenas um 'for' sem condicionais",
+        "Estruturas condicionais (if/elif/else) comparando tempo previsto e tempo gasto",
+        "Apenas um 'while'"
+      ],
+      "correta": 2,
       "explicacao": "Comparações condicionais simples (menor, igual, maior) entre os dois tempos definem diretamente a classificação de cada entrega."
     },
     {
       "pergunta": "Em validação de senha que exige pelo menos 8 caracteres, pelo menos um número e nenhum espaço, qual abordagem básica resolve isso sem bibliotecas avançadas?",
-      "opcoes": ["Verificar apenas o tamanho da string com len()", "Percorrer a string caractere a caractere, verificando cada regra", "Usar apenas o operador 'in' sem laço", "Não é possível validar isso em Python"],
+      "opcoes": [
+        "Não é possível validar isso em Python",
+        "Percorrer a string caractere a caractere, verificando cada regra",
+        "Verificar apenas o tamanho da string com len()",
+        "Usar apenas o operador 'in' sem laço"
+      ],
       "correta": 1,
       "explicacao": "É necessário percorrer cada caractere da senha para checar se algum é dígito, se algum é espaço, além de verificar o tamanho total com len()."
     },
     {
       "pergunta": "Qual é a saída do código abaixo, que testa o operador 'and' com curto-circuito?",
       "codigo": "usuario = True\nsenha = False\nadmin = True\n\nif usuario and senha or admin:\n    acesso = True\nelse:\n    acesso = False\nprint(acesso)",
-      "opcoes": ["False", "True", "Erro de sintaxe", "None"],
-      "correta": 1,
+      "opcoes": [
+        "Erro de sintaxe",
+        "None",
+        "True",
+        "False"
+      ],
+      "correta": 2,
       "explicacao": "Por precedência de operadores, a expressão equivale a (usuario and senha) or admin. Como admin é True, o resultado final de acesso é True."
     },
     {
       "pergunta": "Em estruturas de repetição que somam valores (acumuladores), qual é o cuidado essencial na inicialização da variável acumuladora?",
-      "opcoes": ["Sempre inicializar com 100", "Inicializar com um valor neutro para a operação (geralmente 0 para soma, 1 para produto)", "Nunca inicializar a variável antes do loop", "Inicializar sempre com o último valor lido"],
+      "opcoes": [
+        "Sempre inicializar com 100",
+        "Inicializar com um valor neutro para a operação (geralmente 0 para soma, 1 para produto)",
+        "Inicializar sempre com o último valor lido",
+        "Nunca inicializar a variável antes do loop"
+      ],
       "correta": 1,
       "explicacao": "Inicializar com o valor neutro garante que a primeira operação do loop não distorça o resultado: 0 para somas, 1 para produtos/multiplicações."
     },
     {
       "pergunta": "Qual é o resultado da expressão 10 // 3 em Python?",
       "codigo": "print(10 // 3)",
-      "opcoes": ["3.33", "3", "1", "3.0"],
-      "correta": 1,
+      "opcoes": [
+        "3.0",
+        "3.33",
+        "1",
+        "3"
+      ],
+      "correta": 3,
       "explicacao": "O operador // realiza divisão inteira, retornando apenas a parte inteira do quociente. 10 dividido por 3 dá 3 inteiro, com resto 1."
     },
     {
       "pergunta": "Qual é o resultado da expressão 10 % 3 em Python?",
       "codigo": "print(10 % 3)",
-      "opcoes": ["3", "0", "1", "3.33"],
+      "opcoes": [
+        "0",
+        "3.33",
+        "1",
+        "3"
+      ],
       "correta": 2,
       "explicacao": "O operador % retorna o resto da divisão inteira. Como 10 = 3×3 + 1, o resto (e resultado de 10 % 3) é 1."
     },
     {
       "pergunta": "Qual é o resultado de 6 / 2 em Python, e qual o tipo desse resultado?",
       "codigo": "resultado = 6 / 2\nprint(resultado, type(resultado))",
-      "opcoes": ["3, int", "3.0, float", "3, float", "Erro de tipo"],
-      "correta": 1,
+      "opcoes": [
+        "3.0, float",
+        "Erro de tipo",
+        "3, int",
+        "3, float"
+      ],
+      "correta": 0,
       "explicacao": "Em Python, o operador / sempre produz um resultado do tipo float, mesmo quando a divisão é exata. Por isso 6/2 resulta em 3.0, não em 3."
     },
     {
       "pergunta": "Considerando a regra de precedência de operadores em Python (potência, depois multiplicação/divisão, depois soma/subtração), qual é o resultado de 2 + 3 * 4?",
       "codigo": "a = 2\nb = 3\nc = 4\nresultado = a + b * c\nprint(resultado)",
-      "opcoes": ["20", "14", "24", "9"],
-      "correta": 1,
+      "opcoes": [
+        "9",
+        "24",
+        "14",
+        "20"
+      ],
+      "correta": 2,
       "explicacao": "A multiplicação tem precedência sobre a soma: primeiro calcula-se 3*4=12, depois soma-se 2+12=14."
     },
     {
       "pergunta": "Como usar parênteses altera o resultado de uma expressão com múltiplos operadores?",
       "codigo": "a = 2\nb = 3\nc = 4\nresultado = (a + b) * c\nprint(resultado)",
-      "opcoes": ["14", "20", "9", "24"],
+      "opcoes": [
+        "14",
+        "20",
+        "9",
+        "24"
+      ],
       "correta": 1,
       "explicacao": "Os parênteses têm prioridade máxima na avaliação: primeiro soma-se (2+3)=5, depois multiplica-se 5*4=20, alterando o resultado em relação à expressão sem parênteses."
     },
     {
       "pergunta": "Qual é a diferença fundamental entre o operador '=' e o operador '==' em Python?",
-      "opcoes": ["Não há diferença, são sinônimos", "'=' atribui um valor a uma variável; '==' compara dois valores e retorna um booleano", "'==' é usado apenas em strings", "'=' só funciona com números inteiros"],
-      "correta": 1,
+      "opcoes": [
+        "Não há diferença, são sinônimos",
+        "'==' é usado apenas em strings",
+        "'=' só funciona com números inteiros",
+        "'=' atribui um valor a uma variável; '==' compara dois valores e retorna um booleano"
+      ],
+      "correta": 3,
       "explicacao": "Um erro comum para iniciantes é confundir os dois: '=' é o comando de atribuição (armazena um valor), enquanto '==' é o operador de comparação (verifica igualdade e retorna True ou False)."
     },
     {
       "pergunta": "Qual é o resultado da comparação abaixo em Python?",
       "codigo": "idade = 20\nresultado = idade >= 18\nprint(resultado)",
-      "opcoes": ["20", "18", "True", "'True'"],
+      "opcoes": [
+        "20",
+        "'True'",
+        "True",
+        "18"
+      ],
       "correta": 2,
       "explicacao": "Comparações em Python produzem valores do tipo bool, que podem ser apenas True ou False. Como 20 >= 18, o resultado é True (sem aspas, pois não é uma string)."
     },
     {
       "pergunta": "O que a função range(1, 6) gera quando percorrida em um laço for?",
       "codigo": "for i in range(1, 6):\n    print(i, end=' ')",
-      "opcoes": ["1 2 3 4 5 6", "1 2 3 4 5", "0 1 2 3 4 5", "2 3 4 5 6"],
-      "correta": 1,
+      "opcoes": [
+        "1 2 3 4 5",
+        "2 3 4 5 6",
+        "0 1 2 3 4 5",
+        "1 2 3 4 5 6"
+      ],
+      "correta": 0,
       "explicacao": "Em range(início, fim), o valor inicial está incluso e o valor final NÃO está incluso. Por isso range(1,6) gera 1,2,3,4,5."
     },
     {
       "pergunta": "O que o terceiro parâmetro de range(início, fim, passo) representa?",
       "codigo": "for i in range(1, 10, 2):\n    print(i, end=' ')",
-      "opcoes": ["A quantidade total de números gerados", "O incremento (de quanto em quanto a sequência avança)", "O valor final, substituindo o segundo parâmetro", "Um valor decorativo sem função real"],
-      "correta": 1,
+      "opcoes": [
+        "O valor final, substituindo o segundo parâmetro",
+        "Um valor decorativo sem função real",
+        "A quantidade total de números gerados",
+        "O incremento (de quanto em quanto a sequência avança)"
+      ],
+      "correta": 3,
       "explicacao": "O terceiro parâmetro de range() é o passo (incremento). range(1, 10, 2) avança de 2 em 2 a partir de 1, gerando 1, 3, 5, 7, 9."
     },
     {
       "pergunta": "Em Python, qual é o índice do primeiro caractere de uma string?",
       "codigo": "palavra = 'python'\nprint(palavra[0])  # Esse print mostra o CARACTERE no índice 0, nao o indice em si",
-      "opcoes": ["1", "0", "Depende do tamanho da string", "Strings não podem ser acessadas por índice"],
-      "correta": 1,
+      "opcoes": [
+        "Depende do tamanho da string",
+        "1",
+        "0",
+        "Strings não podem ser acessadas por índice"
+      ],
+      "correta": 2,
       "explicacao": "Em Python (como na maioria das linguagens), os índices de strings e listas começam em 0. O código palavra[0] acessa a posição de índice 0, que contém o caractere 'p' — mas o índice em si é 0."
     },
     {
       "pergunta": "O que a função ord() faz em Python?",
       "codigo": "print(ord('a'))",
-      "opcoes": ["Converte um número em caractere", "Converte um caractere no seu código numérico correspondente", "Ordena uma lista de caracteres", "Remove acentos de uma string"],
-      "correta": 1,
+      "opcoes": [
+        "Converte um caractere no seu código numérico correspondente",
+        "Remove acentos de uma string",
+        "Converte um número em caractere",
+        "Ordena uma lista de caracteres"
+      ],
+      "correta": 0,
       "explicacao": "ord() retorna o código numérico (Unicode/ASCII) de um caractere. ord('a') retorna 97, pois cada caractere é internamente associado a um número."
     },
     {
       "pergunta": "O que a função chr() faz, sendo o caminho inverso de ord()?",
       "codigo": "print(chr(97))",
-      "opcoes": ["Converte um caractere em número", "Converte um número no caractere correspondente a esse código", "Conta quantos caracteres há na string", "Compara dois caracteres"],
-      "correta": 1,
+      "opcoes": [
+        "Compara dois caracteres",
+        "Conta quantos caracteres há na string",
+        "Converte um número no caractere correspondente a esse código",
+        "Converte um caractere em número"
+      ],
+      "correta": 2,
       "explicacao": "chr() é o inverso de ord(): recebe um código numérico e retorna o caractere correspondente. chr(97) retorna 'a'."
     },
     {
       "pergunta": "Quando uma função em Python não possui a palavra-chave 'return', o que ela retorna ao ser chamada?",
       "codigo": "def imprime_algo():\n    print('ola')\n\nresultado = imprime_algo()\nprint(resultado)",
-      "opcoes": ["Uma string vazia", "0", "None", "Um erro de sintaxe"],
-      "correta": 2,
+      "opcoes": [
+        "0",
+        "Um erro de sintaxe",
+        "Uma string vazia",
+        "None"
+      ],
+      "correta": 3,
       "explicacao": "Funções sem 'return' explícito retornam automaticamente o valor especial None, que representa a ausência de valor em Python."
     },
     {
       "pergunta": "Qual é a diferença prática entre uma função que usa print() e uma que usa return?",
-      "opcoes": ["São idênticas, não há diferença", "print() apenas exibe um valor na tela; return devolve o valor para ser usado/armazenado em outra parte do programa", "return só funciona em funções recursivas", "print() só pode ser usado dentro de funções"],
+      "opcoes": [
+        "print() só pode ser usado dentro de funções",
+        "print() apenas exibe um valor na tela; return devolve o valor para ser usado/armazenado em outra parte do programa",
+        "São idênticas, não há diferença",
+        "return só funciona em funções recursivas"
+      ],
       "correta": 1,
       "explicacao": "print() exibe algo no console, mas o valor exibido não pode ser reaproveitado pelo programa. return devolve um valor que pode ser armazenado em uma variável e usado posteriormente."
     },
     {
       "pergunta": "O que é um parâmetro com valor padrão (default) em uma função Python?",
       "codigo": "def saudacao(nome='visitante'):\n    return f'Ola, {nome}!'\n\nprint(saudacao())\nprint(saudacao('Maria'))",
-      "opcoes": ["Um parâmetro obrigatório que nunca pode ser omitido", "Um valor assumido automaticamente quando o argumento não é informado na chamada", "Um erro comum de sintaxe", "Um parâmetro que só aceita números"],
+      "opcoes": [
+        "Um parâmetro obrigatório que nunca pode ser omitido",
+        "Um valor assumido automaticamente quando o argumento não é informado na chamada",
+        "Um erro comum de sintaxe",
+        "Um parâmetro que só aceita números"
+      ],
       "correta": 1,
       "explicacao": "Parâmetros com valor padrão (ex: nome='visitante') permitem chamar a função sem informar aquele argumento; nesse caso, o valor padrão é usado automaticamente."
     },
     {
       "pergunta": "Por que é considerado uma boa prática que funções recebam dados através de parâmetros, em vez de depender diretamente de variáveis externas (globais)?",
-      "opcoes": ["Porque deixa o código mais lento", "Porque torna a função mais reutilizável e independente, podendo funcionar com diferentes valores sem depender do contexto externo", "Não há vantagem real nisso", "Porque é a única forma de uma função funcionar em Python"],
-      "correta": 1,
+      "opcoes": [
+        "Não há vantagem real nisso",
+        "Porque deixa o código mais lento",
+        "Porque é a única forma de uma função funcionar em Python",
+        "Porque torna a função mais reutilizável e independente, podendo funcionar com diferentes valores sem depender do contexto externo"
+      ],
+      "correta": 3,
       "explicacao": "Funções que recebem dados como parâmetros são mais flexíveis e reutilizáveis, pois podem ser chamadas com valores diferentes sem precisar alterar variáveis externas antes de cada chamada."
     },
     {
       "pergunta": "Para que serve a importação de uma biblioteca como 'random' em Python?",
       "codigo": "import random\nnumero = random.randint(1, 10)",
-      "opcoes": ["Para criar variáveis automaticamente", "Para reutilizar código já pronto, evitando reescrever funcionalidades como geração de números aleatórios", "Apenas para fins decorativos no código", "random não existe em Python"],
-      "correta": 1,
+      "opcoes": [
+        "Para criar variáveis automaticamente",
+        "random não existe em Python",
+        "Apenas para fins decorativos no código",
+        "Para reutilizar código já pronto, evitando reescrever funcionalidades como geração de números aleatórios"
+      ],
+      "correta": 3,
       "explicacao": "Bibliotecas (módulos) permitem reutilizar código já implementado por outras pessoas. O módulo random oferece funções prontas para geração de valores aleatórios, sem precisar implementar essa lógica do zero."
     }
   ],
@@ -217,423 +377,753 @@
     {
       "pergunta": "Qual é a saída do código abaixo, que usa um conjunto (set) para remover duplicatas?",
       "codigo": "numeros = [4, 2, 4, 8, 2, 10, 8]\nsem_repeticao = set(numeros)\nresultado = list(sem_repeticao)\nprint(len(resultado))",
-      "opcoes": ["7", "4", "3", "Erro, listas não podem ser convertidas em conjuntos"],
+      "opcoes": [
+        "7",
+        "4",
+        "3",
+        "Erro, listas não podem ser convertidas em conjuntos"
+      ],
       "correta": 1,
       "explicacao": "A lista [4, 2, 4, 8, 2, 10, 8] tem 4 valores distintos: 4, 2, 8 e 10. Convertendo para set, as duplicatas são removidas, restando 4 elementos."
     },
     {
       "pergunta": "Em um dicionário de biblioteca onde a chave é o ISBN e o valor é uma lista [Titulo, Autor, Estoque], como se atualiza a quantidade em estoque de um livro?",
-      "opcoes": ["Substituindo o dicionário inteiro", "Acessando a posição correspondente na lista através da chave, ex: livros[isbn][2] -= 1", "Não é possível atualizar valores dentro de listas em dicionários", "Criando um novo ISBN para cada empréstimo"],
-      "correta": 1,
+      "opcoes": [
+        "Acessando a posição correspondente na lista através da chave, ex: livros[isbn][2] -= 1",
+        "Criando um novo ISBN para cada empréstimo",
+        "Substituindo o dicionário inteiro",
+        "Não é possível atualizar valores dentro de listas em dicionários"
+      ],
+      "correta": 0,
       "explicacao": "Como o valor associado à chave é uma lista (mutável), é possível acessar e modificar diretamente um índice específico, como o estoque na posição 2."
     },
     {
       "pergunta": "Qual é a saída do código abaixo, que percorre um dicionário aninhado?",
       "codigo": "vendas = {\n    'V01': {'cliente': 'Ana', 'valor': 500.00},\n    'V02': {'cliente': 'Mateus', 'valor': 1200.00}\n}\ndestaque = ''\nmaior = 0\nfor cod, dados in vendas.items():\n    if dados['valor'] > maior:\n        maior = dados['valor']\n        destaque = dados['cliente']\nprint(destaque)",
-      "opcoes": ["1200.00", "V02", "Mateus", "Erro de sintaxe"],
-      "correta": 2,
+      "opcoes": [
+        "V02",
+        "Mateus",
+        "1200.00",
+        "Erro de sintaxe"
+      ],
+      "correta": 1,
       "explicacao": "O laço percorre o dicionário aninhado, comparando os valores de venda. Mateus tem o maior valor (1200.00), então 'destaque' recebe seu nome."
     },
     {
       "pergunta": "Para determinar se uma matriz quadrada é simétrica (M[i][j] == M[j][i] para todo i, j), qual estrutura é necessária?",
-      "opcoes": ["Apenas um laço for simples", "Dois laços for aninhados, comparando elementos espelhados", "Apenas a função sorted()", "Não é possível verificar isso em Python"],
-      "correta": 1,
+      "opcoes": [
+        "Dois laços for aninhados, comparando elementos espelhados",
+        "Apenas a função sorted()",
+        "Não é possível verificar isso em Python",
+        "Apenas um laço for simples"
+      ],
+      "correta": 0,
       "explicacao": "É necessário percorrer cada par de índices (i, j) com laços aninhados e comparar o elemento na posição [i][j] com o da posição espelhada [j][i]."
     },
     {
       "pergunta": "Qual é a saída do código abaixo, que retorna múltiplos valores de uma função?",
       "codigo": "def extrair_data(data_string):\n    partes = data_string.split('/')\n    return partes[0], partes[1], partes[2]\n\ndia, mes, ano = extrair_data('15/08/1995')\nprint(ano)",
-      "opcoes": ["15", "08", "1995", "Erro, função não pode retornar 3 valores"],
+      "opcoes": [
+        "08",
+        "15",
+        "1995",
+        "Erro, função não pode retornar 3 valores"
+      ],
       "correta": 2,
       "explicacao": "A função retorna uma tupla implícita (dia, mes, ano). Ao desempacotar em três variáveis, 'ano' recebe o terceiro elemento, que é '1995'."
     },
     {
       "pergunta": "Em um sistema de contagem de tags únicas de várias publicações (listas de listas), qual estrutura de dados é mais adequada para contar os elementos distintos no total?",
-      "opcoes": ["Uma lista comum", "Um conjunto (set), que armazena apenas valores únicos automaticamente", "Uma tupla", "Um número inteiro simples"],
-      "correta": 1,
+      "opcoes": [
+        "Uma lista comum",
+        "Uma tupla",
+        "Um conjunto (set), que armazena apenas valores únicos automaticamente",
+        "Um número inteiro simples"
+      ],
+      "correta": 2,
       "explicacao": "Conjuntos (sets) eliminam duplicatas automaticamente, sendo ideais para reunir todas as tags de múltiplas listas e contar quantas são realmente distintas."
     },
     {
       "pergunta": "Para criar uma matriz transposta (trocar linhas por colunas) de uma matriz M x N, qual é o resultado esperado em termos de dimensão?",
-      "opcoes": ["A matriz transposta sempre tem a mesma dimensão M x N", "A matriz transposta passa a ter dimensão N x M", "A transposição só funciona em matrizes quadradas", "A transposição apaga a matriz original automaticamente"],
-      "correta": 1,
+      "opcoes": [
+        "A matriz transposta passa a ter dimensão N x M",
+        "A matriz transposta sempre tem a mesma dimensão M x N",
+        "A transposição apaga a matriz original automaticamente",
+        "A transposição só funciona em matrizes quadradas"
+      ],
+      "correta": 0,
       "explicacao": "Transpor uma matriz significa trocar suas linhas por colunas; uma matriz de dimensão M x N se torna N x M após a transposição."
     },
     {
       "pergunta": "Em uma lista de dicionários representando funcionários, qual estrutura permite agrupar e calcular estatísticas (média, maior, menor salário) por setor?",
-      "opcoes": ["Uma lista simples de números", "Um dicionário onde a chave é o setor e o valor é outro dicionário com as estatísticas", "Apenas variáveis soltas para cada setor", "Não é possível agrupar dados em Python"],
+      "opcoes": [
+        "Não é possível agrupar dados em Python",
+        "Um dicionário onde a chave é o setor e o valor é outro dicionário com as estatísticas",
+        "Apenas variáveis soltas para cada setor",
+        "Uma lista simples de números"
+      ],
       "correta": 1,
       "explicacao": "Dicionários aninhados permitem organizar os dados hierarquicamente: cada setor (chave) aponta para um dicionário com suas próprias métricas calculadas."
     },
     {
       "pergunta": "Em uma função que aplica desconto progressivo em uma lista de preços (5% acima de R$100, 10% acima de R$500), qual é a estrutura lógica correta?",
-      "opcoes": ["Aplicar sempre 10% a todos os itens", "Percorrer a lista verificando a faixa de preço de cada item antes de aplicar o desconto correspondente", "Aplicar o desconto apenas ao primeiro item da lista", "Somar todos os preços antes de decidir o desconto"],
+      "opcoes": [
+        "Somar todos os preços antes de decidir o desconto",
+        "Percorrer a lista verificando a faixa de preço de cada item antes de aplicar o desconto correspondente",
+        "Aplicar sempre 10% a todos os itens",
+        "Aplicar o desconto apenas ao primeiro item da lista"
+      ],
       "correta": 1,
       "explicacao": "Cada item deve ser avaliado individualmente contra as faixas de valor (acima de R$100 ou R$500) para aplicar o percentual de desconto correto a ele."
     },
     {
       "pergunta": "Para validar um sistema de votação em que um eleitor não pode votar duas vezes (valendo o voto mais recente), quais estruturas de dados são mais adequadas?",
-      "opcoes": ["Apenas uma lista de votos, sem controle", "Um conjunto para rastrear IDs já vistos e um dicionário para armazenar o voto atual de cada um", "Apenas uma variável contadora", "Uma tupla imutável para todos os votos"],
+      "opcoes": [
+        "Apenas uma variável contadora",
+        "Um conjunto para rastrear IDs já vistos e um dicionário para armazenar o voto atual de cada um",
+        "Apenas uma lista de votos, sem controle",
+        "Uma tupla imutável para todos os votos"
+      ],
       "correta": 1,
       "explicacao": "O dicionário substitui automaticamente o valor de uma chave repetida (o voto mais recente prevalece), e o conjunto auxilia a verificar quais eleitores já votaram."
     },
     {
       "pergunta": "Em uma matriz representando um teatro (10x10) inicializada com 0 (livre), como se verifica a porcentagem de ocupação total?",
-      "opcoes": ["Contando quantas células têm valor 1 e dividindo pelo total de células (100)", "Somando os índices de linha e coluna", "Apenas verificando a primeira linha da matriz", "Multiplicando o número de linhas pelo número de colunas"],
-      "correta": 0,
+      "opcoes": [
+        "Multiplicando o número de linhas pelo número de colunas",
+        "Somando os índices de linha e coluna",
+        "Apenas verificando a primeira linha da matriz",
+        "Contando quantas células têm valor 1 e dividindo pelo total de células (100)"
+      ],
+      "correta": 3,
       "explicacao": "Percorrendo toda a matriz e contando as células marcadas como ocupadas (valor 1), divide-se pelo total de assentos (100) para obter a porcentagem."
     },
     {
       "pergunta": "Ao mesclar duas listas ordenadas de tamanhos diferentes em uma terceira lista também ordenada, sem usar sort(), qual técnica é utilizada?",
-      "opcoes": ["Concatenar as duas listas e não fazer mais nada", "Comparar os elementos atuais de cada lista, inserindo o menor por vez (intercalação)", "Inverter uma das listas antes de juntar", "Usar apenas a função max() repetidamente"],
-      "correta": 1,
+      "opcoes": [
+        "Usar apenas a função max() repetidamente",
+        "Concatenar as duas listas e não fazer mais nada",
+        "Inverter uma das listas antes de juntar",
+        "Comparar os elementos atuais de cada lista, inserindo o menor por vez (intercalação)"
+      ],
+      "correta": 3,
       "explicacao": "A técnica de intercalação compara o elemento atual de cada lista e insere o menor na lista resultado, avançando o índice da lista correspondente."
     },
     {
       "pergunta": "Em uma análise de imagem, um filtro de suavização substitui o valor de um pixel pela média de seus vizinhos diretos. Quais elementos da matriz NÃO devem ser processados por esse filtro?",
-      "opcoes": ["Os elementos do centro da matriz", "Os elementos das bordas, pois não possuem todos os vizinhos diretos", "Todos os elementos podem ser processados igualmente", "Apenas os elementos pares"],
-      "correta": 1,
+      "opcoes": [
+        "Os elementos das bordas, pois não possuem todos os vizinhos diretos",
+        "Os elementos do centro da matriz",
+        "Apenas os elementos pares",
+        "Todos os elementos podem ser processados igualmente"
+      ],
+      "correta": 0,
       "explicacao": "Elementos nas bordas da matriz não possuem vizinhos completos (cima, baixo, esquerda, direita), então geralmente são excluídos desse tipo de filtro."
     },
     {
       "pergunta": "Para calcular o atraso médio apenas das entregas atrasadas (ignorando adiantadas e no prazo), qual é o cuidado fundamental?",
-      "opcoes": ["Somar o atraso de todas as entregas, mesmo as adiantadas", "Acumular o atraso e contar apenas as entregas classificadas como atrasadas para o cálculo da média", "Ignorar completamente os casos de atraso", "Usar sempre o valor 0 como atraso médio"],
-      "correta": 1,
+      "opcoes": [
+        "Ignorar completamente os casos de atraso",
+        "Somar o atraso de todas as entregas, mesmo as adiantadas",
+        "Usar sempre o valor 0 como atraso médio",
+        "Acumular o atraso e contar apenas as entregas classificadas como atrasadas para o cálculo da média"
+      ],
+      "correta": 3,
       "explicacao": "Incluir entregas adiantadas no cálculo distorceria a média; o cálculo deve considerar apenas os casos em que efetivamente houve atraso real."
     },
     {
       "pergunta": "Quantos tipos de estruturas (listas, dicionários, tuplas, sets) costumam ser combinados em problemas de catálogo (ex: filmes por gênero)?",
-      "opcoes": ["Apenas listas", "Dicionário cuja chave é o gênero e o valor é uma lista de títulos pertencentes a ele", "Apenas uma tupla de strings", "Apenas variáveis isoladas para cada gênero"],
+      "opcoes": [
+        "Apenas variáveis isoladas para cada gênero",
+        "Dicionário cuja chave é o gênero e o valor é uma lista de títulos pertencentes a ele",
+        "Apenas uma tupla de strings",
+        "Apenas listas"
+      ],
       "correta": 1,
       "explicacao": "Um dicionário organizado por gênero, cujo valor é uma lista de títulos, permite agrupar e consultar filmes por categoria de forma eficiente."
     },
     {
       "pergunta": "Em um sistema de login que usa 'while senha != \"correta\" and tentativas < 3:', qual é o papel do operador 'and' nessa condição?",
-      "opcoes": ["Faz o loop rodar para sempre", "Garante que o loop continue apenas enquanto AMBAS as condições forem verdadeiras: senha errada E tentativas disponíveis", "Substitui o operador de comparação ==", "Não tem efeito real na lógica"],
-      "correta": 1,
+      "opcoes": [
+        "Garante que o loop continue apenas enquanto AMBAS as condições forem verdadeiras: senha errada E tentativas disponíveis",
+        "Substitui o operador de comparação ==",
+        "Faz o loop rodar para sempre",
+        "Não tem efeito real na lógica"
+      ],
+      "correta": 0,
       "explicacao": "O 'and' exige que as duas condições sejam verdadeiras simultaneamente para continuar o loop: a senha ainda estar incorreta E ainda haver tentativas restantes. Se qualquer uma for falsa, o loop para."
     },
     {
       "pergunta": "Ao analisar a 'quantidade de trabalho' que um algoritmo de contagem de caracteres faz, o que costuma ser usado como medida de crescimento?",
-      "opcoes": ["O tempo do relógio em segundos", "O tamanho da entrada (N) e como o número de operações cresce em relação a N", "A quantidade de variáveis declaradas no código", "O número de funções chamadas"],
-      "correta": 1,
+      "opcoes": [
+        "O número de funções chamadas",
+        "O tempo do relógio em segundos",
+        "O tamanho da entrada (N) e como o número de operações cresce em relação a N",
+        "A quantidade de variáveis declaradas no código"
+      ],
+      "correta": 2,
       "explicacao": "Na análise de complexidade de algoritmos, observamos como o número de operações cresce conforme o tamanho da entrada (N) aumenta — não o tempo exato de execução, que varia por máquina."
     },
     {
       "pergunta": "Em um algoritmo que percorre todos os caracteres de um texto de tamanho N uma única vez para contá-los, como o trabalho do algoritmo cresce em relação a N?",
-      "opcoes": ["Cresce de forma exponencial", "Cresce de forma linear (proporcional a N)", "É sempre constante, independente de N", "Decresce conforme N aumenta"],
-      "correta": 1,
+      "opcoes": [
+        "Cresce de forma linear (proporcional a N)",
+        "É sempre constante, independente de N",
+        "Decresce conforme N aumenta",
+        "Cresce de forma exponencial"
+      ],
+      "correta": 0,
       "explicacao": "Percorrer cada caractere uma vez (sem laços aninhados) significa que o número de operações cresce linearmente: dobrar o tamanho do texto dobra aproximadamente o trabalho realizado."
     },
     {
       "pergunta": "O que a função range(10, 0, -2) gera quando percorrida em um for?",
       "codigo": "for i in range(10, 0, -2):\n    print(i, end=' ')",
-      "opcoes": ["10 8 6 4 2 0", "10 8 6 4 2", "0 2 4 6 8 10", "Erro, range não aceita passo negativo"],
+      "opcoes": [
+        "Erro, range não aceita passo negativo",
+        "10 8 6 4 2",
+        "0 2 4 6 8 10",
+        "10 8 6 4 2 0"
+      ],
       "correta": 1,
       "explicacao": "Com passo negativo, a contagem é decrescente. Começa em 10 (incluso), decrementa de 2 em 2, e para antes de alcançar 0 (que não está incluso): 10, 8, 6, 4, 2."
     },
     {
       "pergunta": "Em um algoritmo de busca que divide o problema pela metade a cada tentativa (como 'adivinhar um número de 1 a 100' usando dicas de maior/menor), qual estratégia de pilar do Pensamento Computacional está sendo aplicada?",
-      "opcoes": ["Apenas decomposição", "Reconhecimento de padrões combinado com redução progressiva do espaço de busca (técnica de busca binária)", "Apenas abstração de dados", "Nenhuma estratégia formal, é aleatório"],
-      "correta": 1,
+      "opcoes": [
+        "Reconhecimento de padrões combinado com redução progressiva do espaço de busca (técnica de busca binária)",
+        "Nenhuma estratégia formal, é aleatório",
+        "Apenas abstração de dados",
+        "Apenas decomposição"
+      ],
+      "correta": 0,
       "explicacao": "Reduzir o espaço de busca pela metade a cada tentativa é a ideia central da busca binária, uma aplicação prática de reconhecimento de padrões para tornar algoritmos mais eficientes."
     },
     {
       "pergunta": "O que acontece ao tentar modificar uma variável global dentro de uma função, sem declarar a palavra-chave 'global' antes?",
       "codigo": "contador = 0\ndef incrementa():\n    contador = contador + 1\nincrementa()",
-      "opcoes": ["A variável global é incrementada normalmente", "Ocorre um erro (UnboundLocalError), pois o Python trata 'contador' como uma variável local não inicializada", "O programa imprime 1 automaticamente", "Nada acontece, o código roda silenciosamente"],
-      "correta": 1,
+      "opcoes": [
+        "A variável global é incrementada normalmente",
+        "Nada acontece, o código roda silenciosamente",
+        "O programa imprime 1 automaticamente",
+        "Ocorre um erro (UnboundLocalError), pois o Python trata 'contador' como uma variável local não inicializada"
+      ],
+      "correta": 3,
       "explicacao": "Ao atribuir um valor a 'contador' dentro da função, o Python o trata como variável local. Como ela é usada antes de receber um valor local, ocorre UnboundLocalError. É necessário usar 'global contador' para modificar a variável externa."
     },
     {
       "pergunta": "Qual é a forma correta de modificar uma variável global dentro de uma função em Python?",
       "codigo": "contador = 0\ndef incrementa():\n    global contador\n    contador += 1\nincrementa()\nprint(contador)",
-      "opcoes": ["Não é possível modificar variáveis globais dentro de funções", "Declarando 'global nome_da_variavel' antes de modificá-la dentro da função", "Apenas renomeando a variável", "Usando return obrigatoriamente"],
-      "correta": 1,
+      "opcoes": [
+        "Não é possível modificar variáveis globais dentro de funções",
+        "Apenas renomeando a variável",
+        "Usando return obrigatoriamente",
+        "Declarando 'global nome_da_variavel' antes de modificá-la dentro da função"
+      ],
+      "correta": 3,
       "explicacao": "A palavra-chave 'global' informa ao Python que aquela variável dentro da função se refere à variável global existente, permitindo modificá-la diretamente. O resultado final é contador = 1."
     },
     {
       "pergunta": "Uma função pode retornar mais de um valor simultaneamente em Python?",
       "codigo": "def dividir(a, b):\n    return a // b, a % b\nq, r = dividir(17, 5)\nprint(q, r)",
-      "opcoes": ["Não, Python só permite um valor de retorno", "Sim, os valores são retornados como uma tupla implícita, que pode ser desempacotada em múltiplas variáveis", "Sim, mas apenas usando listas explicitamente", "Sim, mas apenas em funções recursivas"],
-      "correta": 1,
+      "opcoes": [
+        "Sim, mas apenas em funções recursivas",
+        "Não, Python só permite um valor de retorno",
+        "Sim, mas apenas usando listas explicitamente",
+        "Sim, os valores são retornados como uma tupla implícita, que pode ser desempacotada em múltiplas variáveis"
+      ],
+      "correta": 3,
       "explicacao": "Quando uma função usa 'return valor1, valor2', o Python empacota os dois em uma tupla. Ao chamar a função e atribuir a múltiplas variáveis (q, r = ...), ela é desempacotada automaticamente."
     },
     {
       "pergunta": "Qual é a finalidade da expressão 'if __name__ == \"__main__\":' em um arquivo Python?",
-      "opcoes": ["É obrigatória em todo programa Python, sem exceção", "Garante que aquele bloco de código só execute quando o arquivo for executado diretamente, não quando for importado como módulo", "Serve apenas para comentar o código", "Define o nome da classe principal"],
-      "correta": 1,
+      "opcoes": [
+        "É obrigatória em todo programa Python, sem exceção",
+        "Define o nome da classe principal",
+        "Garante que aquele bloco de código só execute quando o arquivo for executado diretamente, não quando for importado como módulo",
+        "Serve apenas para comentar o código"
+      ],
+      "correta": 2,
       "explicacao": "Essa verificação evita que código de teste/execução do arquivo principal seja disparado automaticamente quando o arquivo é apenas importado como módulo por outro programa."
     },
     {
       "pergunta": "Como adicionar um elemento ao final de uma lista em Python?",
       "codigo": "lista = []\nlista.append(10)\nlista.append(20)\nprint(lista)",
-      "opcoes": ["lista.add(10)", "lista.append(10)", "lista.insert(10)", "lista + 10"],
+      "opcoes": [
+        "lista.add(10)",
+        "lista.append(10)",
+        "lista.insert(10)",
+        "lista + 10"
+      ],
       "correta": 1,
       "explicacao": "O método .append() adiciona um elemento ao final da lista. lista.add() não existe para listas (esse método é usado em sets)."
     },
     {
       "pergunta": "O que acontece ao tentar acessar um índice que não existe em uma lista?",
       "codigo": "lista = [1, 2, 3]\nprint(lista[5])",
-      "opcoes": ["Retorna None automaticamente", "Lança IndexError, pois o índice está fora do intervalo válido da lista", "Retorna o último elemento da lista", "Cria automaticamente as posições faltantes com valor 0"],
-      "correta": 1,
+      "opcoes": [
+        "Lança IndexError, pois o índice está fora do intervalo válido da lista",
+        "Retorna o último elemento da lista",
+        "Cria automaticamente as posições faltantes com valor 0",
+        "Retorna None automaticamente"
+      ],
+      "correta": 0,
       "explicacao": "Acessar uma posição além do tamanho da lista lança IndexError: list index out of range. Diferente de dicionários (que têm o método .get()), listas não têm um acesso seguro embutido por padrão."
     },
     {
       "pergunta": "Como uma matriz é representada internamente em Python?",
-      "opcoes": ["Como um tipo de dado especial chamado 'matrix'", "Como uma lista de listas, onde cada lista interna representa uma linha", "Apenas com a biblioteca NumPy, nunca de forma nativa", "Como um dicionário de tuplas"],
-      "correta": 1,
+      "opcoes": [
+        "Apenas com a biblioteca NumPy, nunca de forma nativa",
+        "Como um dicionário de tuplas",
+        "Como uma lista de listas, onde cada lista interna representa uma linha",
+        "Como um tipo de dado especial chamado 'matrix'"
+      ],
+      "correta": 2,
       "explicacao": "Python não tem um tipo nativo de matriz; a forma padrão é usar uma lista de listas, onde cada sublista representa uma linha da matriz."
     },
     {
       "pergunta": "Em uma matriz representada como lista de listas, como acessamos o elemento na linha 0, coluna 2?",
       "codigo": "matriz = [[1,2,3],[4,5,6]]\nprint(matriz[0][2])",
-      "opcoes": ["matriz[2][0]", "matriz[0][2]", "matriz(0,2)", "matriz.get(0,2)"],
-      "correta": 1,
+      "opcoes": [
+        "matriz.get(0,2)",
+        "matriz[2][0]",
+        "matriz(0,2)",
+        "matriz[0][2]"
+      ],
+      "correta": 3,
       "explicacao": "O primeiro índice acessa a linha (lista externa) e o segundo acessa a coluna (posição dentro da lista interna). matriz[0][2] acessa a linha 0, terceira posição (índice 2), que é o valor 3."
     },
     {
       "pergunta": "Como desempacotar os valores de uma tupla em variáveis separadas?",
       "codigo": "ponto = (3, 4)\nx, y = ponto\nprint(x, y)",
-      "opcoes": ["Não é possível desempacotar tuplas", "Atribuindo diretamente múltiplas variáveis de uma vez, na mesma ordem dos elementos da tupla", "Apenas usando um laço for", "Apenas convertendo a tupla em lista primeiro"],
-      "correta": 1,
+      "opcoes": [
+        "Atribuindo diretamente múltiplas variáveis de uma vez, na mesma ordem dos elementos da tupla",
+        "Apenas usando um laço for",
+        "Apenas convertendo a tupla em lista primeiro",
+        "Não é possível desempacotar tuplas"
+      ],
+      "correta": 0,
       "explicacao": "Tuplas podem ser desempacotadas diretamente em múltiplas variáveis: cada variável recebe o valor da posição correspondente da tupla, na ordem em que aparecem."
     },
     {
       "pergunta": "Por que sets (conjuntos) são úteis para remover valores duplicados de uma coleção?",
       "codigo": "s = set([1, 2, 2, 3, 3, 3])\nprint(s, len(s))",
-      "opcoes": ["Porque sets ordenam os valores automaticamente", "Porque sets armazenam apenas elementos únicos, descartando duplicatas automaticamente ao serem criados", "Porque sets são mais rápidos que listas para qualquer operação", "Sets não têm relação com duplicatas"],
-      "correta": 1,
+      "opcoes": [
+        "Sets não têm relação com duplicatas",
+        "Porque sets são mais rápidos que listas para qualquer operação",
+        "Porque sets ordenam os valores automaticamente",
+        "Porque sets armazenam apenas elementos únicos, descartando duplicatas automaticamente ao serem criados"
+      ],
+      "correta": 3,
       "explicacao": "Por definição matemática, um conjunto (set) não permite elementos repetidos. Ao converter uma lista com duplicatas para set, o Python remove automaticamente os valores repetidos."
     },
     {
       "pergunta": "Qual é a principal diferença entre uma lista e uma tupla em Python?",
-      "opcoes": ["Não há diferença prática entre elas", "Listas são mutáveis (podem ser alteradas após criadas); tuplas são imutáveis", "Tuplas só podem armazenar números", "Listas usam parênteses e tuplas usam colchetes"],
-      "correta": 1,
+      "opcoes": [
+        "Listas são mutáveis (podem ser alteradas após criadas); tuplas são imutáveis",
+        "Listas usam parênteses e tuplas usam colchetes",
+        "Não há diferença prática entre elas",
+        "Tuplas só podem armazenar números"
+      ],
+      "correta": 0,
       "explicacao": "A diferença fundamental é a mutabilidade: elementos de uma lista podem ser alterados, adicionados ou removidos após sua criação; uma tupla, uma vez criada, não pode ter seus elementos modificados."
     },
     {
       "pergunta": "Em um dicionário Python, como recuperamos todas as chaves armazenadas?",
       "codigo": "d = {'a': 1, 'b': 2}\nprint(list(d.keys()))",
-      "opcoes": ["d.values()", "d.keys()", "d.items()", "d.get()"],
+      "opcoes": [
+        "d.values()",
+        "d.keys()",
+        "d.get()",
+        "d.items()"
+      ],
       "correta": 1,
       "explicacao": "O método .keys() retorna todas as chaves de um dicionário. .values() retorna os valores, e .items() retorna pares (chave, valor)."
     },
     {
       "pergunta": "Ao usar o operador 'in' com um dicionário (ex: 'x' in dicionario), o que exatamente é verificado?",
       "codigo": "d = {'x': 10}\nprint('x' in d, 10 in d)",
-      "opcoes": ["Verifica apenas os valores armazenados", "Verifica se a CHAVE existe no dicionário (não verifica os valores diretamente)", "Verifica tanto chaves quanto valores simultaneamente", "Sempre retorna True para dicionários não vazios"],
-      "correta": 1,
+      "opcoes": [
+        "Sempre retorna True para dicionários não vazios",
+        "Verifica apenas os valores armazenados",
+        "Verifica tanto chaves quanto valores simultaneamente",
+        "Verifica se a CHAVE existe no dicionário (não verifica os valores diretamente)"
+      ],
+      "correta": 3,
       "explicacao": "Por padrão, o operador 'in' em um dicionário verifica se o valor procurado é uma CHAVE existente. Por isso 'x' in d é True (chave existe), mas 10 in d é False (10 é o valor, não a chave)."
     },
     {
       "pergunta": "Qual estrutura permite percorrer simultaneamente as chaves e os valores de um dicionário em um único laço for?",
       "codigo": "d = {'a': 1, 'b': 2}\nfor chave, valor in d.items():\n    print(chave, valor)",
-      "opcoes": ["d.keys()", "d.values()", "d.items()", "Não é possível fazer isso em um único laço"],
-      "correta": 2,
+      "opcoes": [
+        "d.items()",
+        "d.values()",
+        "d.keys()",
+        "Não é possível fazer isso em um único laço"
+      ],
+      "correta": 0,
       "explicacao": "O método .items() retorna pares (chave, valor), permitindo desempacotar ambos diretamente nas variáveis do for, acessando os dois simultaneamente."
     },
     {
       "pergunta": "Para evitar um erro ao acessar uma chave que pode não existir em um dicionário, qual método é mais seguro do que usar colchetes diretamente?",
-      "opcoes": ["dicionario.acessar(chave)", "dicionario.get(chave), que retorna None (ou um valor padrão) em vez de lançar erro", "Não existe forma segura, é necessário usar try/except sempre", "dicionario[chave].safe()"],
-      "correta": 1,
+      "opcoes": [
+        "dicionario.get(chave), que retorna None (ou um valor padrão) em vez de lançar erro",
+        "Não existe forma segura, é necessário usar try/except sempre",
+        "dicionario.acessar(chave)",
+        "dicionario[chave].safe()"
+      ],
+      "correta": 0,
       "explicacao": "O método .get(chave) retorna None (ou um valor padrão definido como segundo argumento) quando a chave não existe, evitando o KeyError que ocorreria ao usar dicionario[chave] diretamente."
     }
   ],
   "dificil": [
     {
       "pergunta": "Qual é o resultado de soma_digitos(4725) em uma função recursiva que soma os algarismos de um número, usando resto e divisão inteira por 10?",
-      "opcoes": ["4725", "18", "4", "20"],
+      "opcoes": [
+        "20",
+        "18",
+        "4",
+        "4725"
+      ],
       "correta": 1,
       "explicacao": "A soma dos algarismos 4+7+2+5 = 18. A função obtém cada algarismo com número % 10 e reduz o número com número // 10 recursivamente."
     },
     {
       "pergunta": "No algoritmo recursivo de Euclides para calcular o MDC, qual é a condição de parada (caso base)?",
-      "opcoes": ["Quando a é igual a b", "Quando b for igual a zero, retornando a", "Quando a for negativo", "O algoritmo de Euclides não tem caso base"],
-      "correta": 1,
+      "opcoes": [
+        "Quando a é igual a b",
+        "O algoritmo de Euclides não tem caso base",
+        "Quando b for igual a zero, retornando a",
+        "Quando a for negativo"
+      ],
+      "correta": 2,
       "explicacao": "No algoritmo de Euclides, calcular_mdc(a, b) chama recursivamente calcular_mdc(b, a % b) até que b seja 0, retornando a como resultado."
     },
     {
       "pergunta": "Em uma função recursiva multiplicar(a, b) que calcula o produto sem usar o operador '*', qual abordagem é correta?",
-      "opcoes": ["Usar divisões sucessivas", "Realizar somas (ou subtrações) sucessivas, tratando sinais e o caso de zero separadamente", "Não é possível multiplicar sem o operador *", "Usar apenas o operador //"],
-      "correta": 1,
+      "opcoes": [
+        "Realizar somas (ou subtrações) sucessivas, tratando sinais e o caso de zero separadamente",
+        "Usar divisões sucessivas",
+        "Não é possível multiplicar sem o operador *",
+        "Usar apenas o operador //"
+      ],
+      "correta": 0,
       "explicacao": "A multiplicação pode ser implementada como soma repetida de um número pelo outro, tratando casos especiais como números negativos e o zero."
     },
     {
       "pergunta": "Em um algoritmo recursivo eh_primo(numero, divisor) que testa primalidade, quando a recursão pode parar concluindo que o número É primo?",
-      "opcoes": ["Quando o divisor é maior que o número", "Quando o quadrado do divisor atual for maior que o número, sem nenhum divisor exato ter sido encontrado", "Apenas quando o divisor for igual a 2", "Nunca, a recursão deve sempre continuar até o número-1"],
+      "opcoes": [
+        "Apenas quando o divisor for igual a 2",
+        "Quando o quadrado do divisor atual for maior que o número, sem nenhum divisor exato ter sido encontrado",
+        "Nunca, a recursão deve sempre continuar até o número-1",
+        "Quando o divisor é maior que o número"
+      ],
       "correta": 1,
       "explicacao": "Se nenhum divisor até a raiz quadrada do número (representado pelo quadrado do divisor atual) dividir exatamente o número, ele é primo — não é necessário testar mais divisores."
     },
     {
       "pergunta": "Em um algoritmo de backtracking para encontrar a saída de um labirinto, o que a função deve fazer ao perceber que uma posição não faz parte do caminho até a saída?",
-      "opcoes": ["Encerrar o programa imediatamente", "Desfazer a marcação de visitado (retroceder) e retornar False para a chamada anterior", "Ignorar o erro e continuar marcando como caminho válido", "Reiniciar o labirinto do zero"],
-      "correta": 1,
+      "opcoes": [
+        "Desfazer a marcação de visitado (retroceder) e retornar False para a chamada anterior",
+        "Reiniciar o labirinto do zero",
+        "Encerrar o programa imediatamente",
+        "Ignorar o erro e continuar marcando como caminho válido"
+      ],
+      "correta": 0,
       "explicacao": "O backtracking exige desfazer marcações de posições que não levam à solução, permitindo que o algoritmo explore outros caminhos possíveis a partir do ponto anterior."
     },
     {
       "pergunta": "Qual exceção é tipicamente lançada ao tentar converter uma string não numérica para float, como em float('abc')?",
-      "opcoes": ["TypeError", "ValueError", "KeyError", "IndexError"],
-      "correta": 1,
+      "opcoes": [
+        "KeyError",
+        "IndexError",
+        "TypeError",
+        "ValueError"
+      ],
+      "correta": 3,
       "explicacao": "ValueError é lançado quando o valor passado para uma função tem o tipo certo, mas conteúdo inválido para a conversão pretendida, como uma string que não representa um número."
     },
     {
       "pergunta": "Em um bloco try/except/else/finally, em que momento o bloco 'finally' é executado?",
-      "opcoes": ["Apenas se uma exceção ocorrer", "Apenas se nenhuma exceção ocorrer", "Sempre, independentemente de uma exceção ter ocorrido ou não", "Nunca, é um bloco apenas decorativo"],
-      "correta": 2,
+      "opcoes": [
+        "Sempre, independentemente de uma exceção ter ocorrido ou não",
+        "Apenas se uma exceção ocorrer",
+        "Nunca, é um bloco apenas decorativo",
+        "Apenas se nenhuma exceção ocorrer"
+      ],
+      "correta": 0,
       "explicacao": "O bloco finally sempre é executado, seja para liberar recursos, fechar arquivos ou conexões, independentemente do resultado do bloco try."
     },
     {
       "pergunta": "Por que usar 'with open(arquivo) as f:' é considerado mais seguro do que abrir e fechar manualmente com open() e close()?",
-      "opcoes": ["Porque é mais rápido de digitar", "Porque garante o fechamento automático do arquivo mesmo se ocorrer uma exceção durante o processamento", "Porque impede qualquer erro de ocorrer no programa", "Não há diferença real entre as duas formas"],
-      "correta": 1,
+      "opcoes": [
+        "Não há diferença real entre as duas formas",
+        "Porque é mais rápido de digitar",
+        "Porque garante o fechamento automático do arquivo mesmo se ocorrer uma exceção durante o processamento",
+        "Porque impede qualquer erro de ocorrer no programa"
+      ],
+      "correta": 2,
       "explicacao": "O gerenciador de contexto 'with' assegura que o arquivo será fechado mesmo que uma exceção interrompa o bloco, evitando vazamento de recursos."
     },
     {
       "pergunta": "Em uma classe Python com atributos privados (ex: __saldo), qual é a forma correta e segura de alterar esse valor externamente?",
-      "opcoes": ["Acessando e modificando diretamente: objeto.__saldo = 1000", "Chamando um método da classe, como objeto.depositar(1000), que aplica as regras de negócio", "Não é possível alterar atributos privados de forma alguma", "Recriando o objeto do zero a cada alteração"],
-      "correta": 1,
+      "opcoes": [
+        "Não é possível alterar atributos privados de forma alguma",
+        "Recriando o objeto do zero a cada alteração",
+        "Chamando um método da classe, como objeto.depositar(1000), que aplica as regras de negócio",
+        "Acessando e modificando diretamente: objeto.__saldo = 1000"
+      ],
+      "correta": 2,
       "explicacao": "Atributos privados devem ser modificados através de métodos da própria classe, que podem validar regras de negócio antes de alterar o estado interno do objeto."
     },
     {
       "pergunta": "Em herança de classes, quando uma subclasse sobrescreve um método da superclasse (como calcular_salario()), qual conceito de POO está sendo aplicado?",
-      "opcoes": ["Encapsulamento", "Polimorfismo", "Composição", "Recursividade"],
-      "correta": 1,
+      "opcoes": [
+        "Polimorfismo",
+        "Recursividade",
+        "Composição",
+        "Encapsulamento"
+      ],
+      "correta": 0,
       "explicacao": "Polimorfismo permite que cada subclasse tenha sua própria implementação de um método com mesmo nome, sendo executado de forma diferente conforme o tipo do objeto."
     },
     {
       "pergunta": "Em um sistema com classes Pedido, ItemPedido e Produto (composição), por que o pedido não deve alterar o estoque do produto antes de confirmar que TODOS os itens têm estoque suficiente?",
-      "opcoes": ["Porque não importa a ordem das operações", "Para evitar inconsistência: se um item falhar, nenhum estoque deve ter sido alterado (operação atômica)", "Porque o Python não permite alterar dois objetos na mesma execução", "Porque sempre há estoque suficiente"],
-      "correta": 1,
+      "opcoes": [
+        "Para evitar inconsistência: se um item falhar, nenhum estoque deve ter sido alterado (operação atômica)",
+        "Porque o Python não permite alterar dois objetos na mesma execução",
+        "Porque sempre há estoque suficiente",
+        "Porque não importa a ordem das operações"
+      ],
+      "correta": 0,
       "explicacao": "Se o estoque for reduzido item a item e um deles falhar no meio do processo, o sistema ficaria em estado inconsistente; por isso a validação completa deve ocorrer antes de qualquer alteração."
     },
     {
       "pergunta": "Ao ler um arquivo de log onde linhas podem ter campos faltantes ou valores não numéricos (ex: 'erro' no lugar de uma temperatura), qual é a abordagem correta?",
-      "opcoes": ["Deixar o programa travar nessas linhas", "Validar cada linha (quantidade de campos e tipo de dado) e ignorar/contar as inválidas separadamente", "Apagar o arquivo inteiro se uma linha estiver errada", "Sempre considerar valores inválidos como zero"],
-      "correta": 1,
+      "opcoes": [
+        "Deixar o programa travar nessas linhas",
+        "Apagar o arquivo inteiro se uma linha estiver errada",
+        "Validar cada linha (quantidade de campos e tipo de dado) e ignorar/contar as inválidas separadamente",
+        "Sempre considerar valores inválidos como zero"
+      ],
+      "correta": 2,
       "explicacao": "Um processamento robusto de arquivos deve validar cada registro individualmente, contabilizando e ignorando entradas inválidas sem comprometer o processamento das válidas."
     },
     {
       "pergunta": "Por que uma função recursiva sem caso base corretamente definido pode causar um erro de 'Stack Overflow' (pilha de chamadas)?",
-      "opcoes": ["Porque o Python limita o uso de memória RAM globalmente", "Porque cada chamada recursiva ocupa espaço na pilha de execução, e sem parada, as chamadas se acumulam indefinidamente", "Porque recursão sempre é proibida em Python", "Isso nunca acontece em Python"],
-      "correta": 1,
+      "opcoes": [
+        "Porque recursão sempre é proibida em Python",
+        "Porque o Python limita o uso de memória RAM globalmente",
+        "Isso nunca acontece em Python",
+        "Porque cada chamada recursiva ocupa espaço na pilha de execução, e sem parada, as chamadas se acumulam indefinidamente"
+      ],
+      "correta": 3,
       "explicacao": "Cada chamada recursiva aloca um novo quadro na pilha de execução; sem um caso base que interrompa as chamadas, a pilha cresce até esgotar a memória disponível."
     },
     {
       "pergunta": "Em uma classe com o método especial calcular_salario() sendo chamado de forma genérica para uma lista de objetos de subclasses diferentes (Gerente, Vendedor, Desenvolvedor), qual conceito de POO viabiliza isso?",
-      "opcoes": ["Cada subclasse precisa de um nome de método diferente", "Polimorfismo, pois o mesmo nome de método se comporta de forma diferente conforme a classe do objeto", "É necessário usar 'if isinstance' antes de cada chamada", "Não é possível fazer isso em Python"],
-      "correta": 1,
+      "opcoes": [
+        "É necessário usar 'if isinstance' antes de cada chamada",
+        "Cada subclasse precisa de um nome de método diferente",
+        "Não é possível fazer isso em Python",
+        "Polimorfismo, pois o mesmo nome de método se comporta de forma diferente conforme a classe do objeto"
+      ],
+      "correta": 3,
       "explicacao": "Graças ao polimorfismo, basta chamar funcionario.calcular_salario() na lista; o Python automaticamente executa a versão do método definida na classe específica de cada objeto."
     },
     {
       "pergunta": "Em um sistema de busca recursiva por código em uma lista de produtos (localizar_produto(produtos, codigo, indice)), por que o parâmetro 'indice' é necessário?",
-      "opcoes": ["Apenas para deixar a função mais lenta", "Para controlar o avanço da busca a cada chamada recursiva, sem usar laços de repetição", "Porque listas não podem ser percorridas sem índice em Python", "O índice não tem utilidade real na função"],
-      "correta": 1,
+      "opcoes": [
+        "Apenas para deixar a função mais lenta",
+        "Porque listas não podem ser percorridas sem índice em Python",
+        "Para controlar o avanço da busca a cada chamada recursiva, sem usar laços de repetição",
+        "O índice não tem utilidade real na função"
+      ],
+      "correta": 2,
       "explicacao": "Como a função não pode usar laços de repetição, o índice avança a cada chamada recursiva, simulando o percurso da lista item por item até encontrar o código ou esgotar a lista."
     },
     {
       "pergunta": "Qual é a principal vantagem de usar 'with open(arquivo) as f:' em vez de abrir o arquivo manualmente com open() e fechar com close()?",
-      "opcoes": ["É apenas uma forma mais curta de escrever, sem diferença real", "O 'with' fecha automaticamente o arquivo ao final do bloco, mesmo que ocorra uma exceção durante o processamento", "with open() é mais rápido para arquivos grandes", "with open() funciona apenas com arquivos CSV"],
-      "correta": 1,
+      "opcoes": [
+        "É apenas uma forma mais curta de escrever, sem diferença real",
+        "with open() funciona apenas com arquivos CSV",
+        "O 'with' fecha automaticamente o arquivo ao final do bloco, mesmo que ocorra uma exceção durante o processamento",
+        "with open() é mais rápido para arquivos grandes"
+      ],
+      "correta": 2,
       "explicacao": "O gerenciador de contexto 'with' garante o fechamento automático do arquivo ao saír do bloco (inclusive em caso de erro), evitando vazamento de recursos do sistema."
     },
     {
       "pergunta": "Ao ler um arquivo de texto linha por linha com .readlines(), o que normalmente vem 'escondido' no final de cada linha lida?",
       "codigo": "with open('exemplo.txt', 'w') as f:\n    f.write('linha1\\n')\n    f.write('linha2\\n')\n\nwith open('exemplo.txt', 'r') as f:\n    linhas = f.readlines()\nprint(repr(linhas[0]))",
-      "opcoes": ["Um espaço em branco extra", "O caractere de quebra de linha \\n", "Um caractere nulo", "Nada, as linhas vêm sempre limpas"],
-      "correta": 1,
+      "opcoes": [
+        "Um caractere nulo",
+        "Nada, as linhas vêm sempre limpas",
+        "Um espaço em branco extra",
+        "O caractere de quebra de linha \\n"
+      ],
+      "correta": 3,
       "explicacao": "Ao ler arquivos texto, cada linha geralmente inclui o caractere de quebra de linha (\\n) no final, exceto possivelmente a última linha do arquivo. Por isso é comum usar .strip() para remover essa quebra."
     },
     {
       "pergunta": "Para que serve o método .strip() ao processar linhas lidas de um arquivo?",
       "codigo": "linha = 'texto exemplo\\n'\nprint(repr(linha.strip()))",
-      "opcoes": ["Para converter a string em número", "Para remover espaços em branco e quebras de linha (\\n) das extremidades da string", "Para dividir a string em uma lista", "Para inverter a ordem dos caracteres"],
-      "correta": 1,
+      "opcoes": [
+        "Para inverter a ordem dos caracteres",
+        "Para dividir a string em uma lista",
+        "Para converter a string em número",
+        "Para remover espaços em branco e quebras de linha (\\n) das extremidades da string"
+      ],
+      "correta": 3,
       "explicacao": ".strip() remove espaços em branco e caracteres de quebra de linha do início e do fim da string, sendo essencial ao processar linhas lidas de arquivos para evitar dados 'sujos'."
     },
     {
       "pergunta": "Ao passar uma lista como parâmetro para uma função e modificar seus elementos internamente (ex: lista[0] = 99), o que acontece com a lista original fora da função?",
       "codigo": "def zera_negativos(lista):\n    for i in range(len(lista)):\n        if lista[i] < 0:\n            lista[i] = 0\ndados = [-5, 3, -2, 8]\nzera_negativos(dados)\nprint(dados)",
-      "opcoes": ["A lista original permanece inalterada, pois Python sempre cria cópias", "A lista original é alterada, pois listas são mutáveis e a referência é compartilhada entre o escopo externo e a função", "Ocorre um erro de execução", "Apenas o primeiro elemento é alterado, os demais permanecem"],
-      "correta": 1,
+      "opcoes": [
+        "A lista original é alterada, pois listas são mutáveis e a referência é compartilhada entre o escopo externo e a função",
+        "Apenas o primeiro elemento é alterado, os demais permanecem",
+        "A lista original permanece inalterada, pois Python sempre cria cópias",
+        "Ocorre um erro de execução"
+      ],
+      "correta": 0,
       "explicacao": "Como listas são objetos mutáveis, passar uma lista para uma função compartilha a mesma referência de memória. Alterar elementos internos (não a variável em si) reflete na lista original fora da função."
     },
     {
       "pergunta": "Qual é a diferença entre modificar elementos de uma lista dentro de uma função e reatribuir a variável local que recebeu a lista (ex: lista = [99, 99, 99])?",
       "codigo": "def tenta_substituir(lista):\n    lista = [99, 99, 99]\noriginal = [1, 2, 3]\ntenta_substituir(original)\nprint(original)",
-      "opcoes": ["Os dois casos produzem o mesmo resultado", "Modificar elementos altera a lista original; reatribuir a variável local cria um novo objeto, sem afetar a lista original externa", "Reatribuir sempre altera a lista original também", "Nenhuma das duas formas afeta a lista original"],
-      "correta": 1,
+      "opcoes": [
+        "Modificar elementos altera a lista original; reatribuir a variável local cria um novo objeto, sem afetar a lista original externa",
+        "Os dois casos produzem o mesmo resultado",
+        "Reatribuir sempre altera a lista original também",
+        "Nenhuma das duas formas afeta a lista original"
+      ],
+      "correta": 0,
       "explicacao": "Alterar elementos (lista[i] = x) modifica o objeto compartilhado. Mas reatribuir a variável local (lista = [...]) faz essa variável apontar para um NOVO objeto, sem afetar a referência original externa, que permanece [1, 2, 3]."
     },
     {
       "pergunta": "O que diferencia o comportamento de tipos imutáveis (int, float, str) dos mutáveis (list, dict, set) quando passados como parâmetro para uma função?",
-      "opcoes": ["Não há diferença alguma entre eles", "Tipos imutáveis criam uma cópia local independente; tipos mutáveis compartilham a referência, permitindo que alterações internas afetem o objeto original", "Tipos mutáveis sempre geram erro ao serem passados como parâmetro", "Apenas tipos numéricos podem ser passados como parâmetro"],
-      "correta": 1,
+      "opcoes": [
+        "Tipos imutáveis criam uma cópia local independente; tipos mutáveis compartilham a referência, permitindo que alterações internas afetem o objeto original",
+        "Apenas tipos numéricos podem ser passados como parâmetro",
+        "Tipos mutáveis sempre geram erro ao serem passados como parâmetro",
+        "Não há diferença alguma entre eles"
+      ],
+      "correta": 0,
       "explicacao": "Ao passar um valor imutável (como int), a função trabalha com uma cópia local; alterações não afetam a variável externa. Já com tipos mutáveis, a referência ao mesmo objeto na memória é compartilhada."
     },
     {
       "pergunta": "Por que uma função recursiva precisa obrigatoriamente de um caso base bem definido?",
-      "opcoes": ["O caso base é apenas opcional, por estética do código", "Sem um caso base que interrompa as chamadas, a função chamaria a si mesma indefinidamente, causando RecursionError (estouro de pilha)", "O caso base serve apenas para deixar o código mais bonito", "Funções recursivas nunca precisam de caso base em Python"],
-      "correta": 1,
+      "opcoes": [
+        "Funções recursivas nunca precisam de caso base em Python",
+        "O caso base serve apenas para deixar o código mais bonito",
+        "O caso base é apenas opcional, por estética do código",
+        "Sem um caso base que interrompa as chamadas, a função chamaria a si mesma indefinidamente, causando RecursionError (estouro de pilha)"
+      ],
+      "correta": 3,
       "explicacao": "O caso base é a condição que interrompe as chamadas recursivas. Sem ele, a recursão nunca termina, esgotando a pilha de chamadas e lançando RecursionError."
     },
     {
       "pergunta": "Na função recursiva de fatorial abaixo, qual é o resultado de fatorial(5)?",
       "codigo": "def fatorial(n):\n    if n <= 1:\n        return 1\n    return n * fatorial(n-1)\nprint(fatorial(5))",
-      "opcoes": ["25", "120", "20", "15"],
-      "correta": 1,
+      "opcoes": [
+        "20",
+        "25",
+        "15",
+        "120"
+      ],
+      "correta": 3,
       "explicacao": "fatorial(5) = 5×4×3×2×1 = 120. A função multiplica n pelo resultado de fatorial(n-1) recursivamente, até atingir o caso base (n<=1, que retorna 1)."
     },
     {
       "pergunta": "Na sequência de Fibonacci recursiva, qual é a relação entre os termos calculados pela função?",
       "codigo": "def fibonacci(n):\n    if n <= 1:\n        return n\n    return fibonacci(n-1) + fibonacci(n-2)\nprint([fibonacci(i) for i in range(8)])",
-      "opcoes": ["Cada termo é o dobro do anterior", "Cada termo é a soma dos dois termos anteriores da sequência", "Cada termo é sempre o número da posição (n)", "Os termos sempre diminuem"],
-      "correta": 1,
+      "opcoes": [
+        "Os termos sempre diminuem",
+        "Cada termo é o dobro do anterior",
+        "Cada termo é sempre o número da posição (n)",
+        "Cada termo é a soma dos dois termos anteriores da sequência"
+      ],
+      "correta": 3,
       "explicacao": "A definição recursiva de Fibonacci soma os dois termos anteriores: fibonacci(n) = fibonacci(n-1) + fibonacci(n-2), produzindo a sequência 0,1,1,2,3,5,8,13..."
     },
     {
       "pergunta": "Em Programação Orientada a Objetos, o que representa o parâmetro 'self' nos métodos de uma classe?",
       "codigo": "class Contador:\n    def __init__(self):\n        self.valor = 0\n    def incrementar(self):\n        self.valor += 1\nc1 = Contador()\nc1.incrementar()\nprint(c1.valor)",
-      "opcoes": ["Uma palavra reservada sem função real", "Uma referência à própria instância do objeto, permitindo acessar e modificar seus atributos específicos", "O nome da classe", "Um parâmetro opcional que pode ser omitido sempre"],
-      "correta": 1,
+      "opcoes": [
+        "Um parâmetro opcional que pode ser omitido sempre",
+        "O nome da classe",
+        "Uma referência à própria instância do objeto, permitindo acessar e modificar seus atributos específicos",
+        "Uma palavra reservada sem função real"
+      ],
+      "correta": 2,
       "explicacao": "'self' representa a instância atual do objeto sobre a qual o método está sendo chamado, permitindo que cada objeto mantenha seus próprios atributos independentes dos demais."
     },
     {
       "pergunta": "Ao criar dois objetos diferentes da mesma classe (ex: c1 = Contador() e c2 = Contador()), os atributos de um objeto afetam o outro?",
       "codigo": "class Contador:\n    def __init__(self):\n        self.valor = 0\n    def incrementar(self):\n        self.valor += 1\nc1 = Contador()\nc2 = Contador()\nc1.incrementar()\nc1.incrementar()\nc2.incrementar()\nprint(c1.valor, c2.valor)",
-      "opcoes": ["Sim, todos os objetos da mesma classe compartilham os mesmos valores de atributos", "Não, cada objeto (instância) mantém seus próprios atributos de forma independente", "Apenas o primeiro objeto criado mantém valores corretos", "Depende da ordem de criação dos objetos"],
+      "opcoes": [
+        "Depende da ordem de criação dos objetos",
+        "Não, cada objeto (instância) mantém seus próprios atributos de forma independente",
+        "Sim, todos os objetos da mesma classe compartilham os mesmos valores de atributos",
+        "Apenas o primeiro objeto criado mantém valores corretos"
+      ],
       "correta": 1,
       "explicacao": "Cada instância de uma classe possui seu próprio espaço de atributos. Incrementar c1 duas vezes e c2 uma vez resulta em c1.valor=2 e c2.valor=1, demonstrando independência total entre objetos."
     },
     {
       "pergunta": "Qual é a diferença entre um erro de sintaxe e uma exceção (erro de execução) em Python?",
-      "opcoes": ["São exatamente a mesma coisa", "Erro de sintaxe impede o programa de nem começar a rodar (código mal formado); exceção ocorre durante a execução de um código sintaticamente correto", "Exceções sempre acontecem antes de erros de sintaxe", "Apenas erros de sintaxe podem ser tratados com try/except"],
-      "correta": 1,
+      "opcoes": [
+        "São exatamente a mesma coisa",
+        "Exceções sempre acontecem antes de erros de sintaxe",
+        "Apenas erros de sintaxe podem ser tratados com try/except",
+        "Erro de sintaxe impede o programa de nem começar a rodar (código mal formado); exceção ocorre durante a execução de um código sintaticamente correto"
+      ],
+      "correta": 3,
       "explicacao": "Erros de sintaxe (SyntaxError) impedem totalmente a execução, pois o Python não consegue nem interpretar o código. Exceções ocorrem em tempo de execução, em código que está sintaticamente correto mas falha por algum motivo (ex: divisão por zero)."
     },
     {
       "pergunta": "Por que é considerado uma prática ruim usar um bloco 'except' genérico (sem especificar o tipo de exceção) na maioria dos casos?",
-      "opcoes": ["Não é uma prática ruim, é sempre recomendado", "Porque dificulta identificar exatamente qual tipo de erro ocorreu, podendo mascarar problemas diferentes sob o mesmo tratamento", "Porque except genérico não funciona em Python", "Porque deixa o programa mais lento"],
-      "correta": 1,
+      "opcoes": [
+        "Não é uma prática ruim, é sempre recomendado",
+        "Porque deixa o programa mais lento",
+        "Porque except genérico não funciona em Python",
+        "Porque dificulta identificar exatamente qual tipo de erro ocorreu, podendo mascarar problemas diferentes sob o mesmo tratamento"
+      ],
+      "correta": 3,
       "explicacao": "Um except genérico captura qualquer tipo de exceção da mesma forma, tornando difícil saber se o erro foi de tipo, valor, arquivo não encontrado, etc. Capturar exceções específicas (ValueError, ZeroDivisionError) permite tratamento direcionado para cada cenário."
     },
     {
       "pergunta": "Qual bloco em uma estrutura try/except/else/finally é executado independentemente de uma exceção ter ocorrido ou não?",
       "codigo": "def funcao_com_finally():\n    try:\n        return 'do try'\n    finally:\n        print('finally executou')\nprint(funcao_com_finally())",
-      "opcoes": ["else", "except", "finally", "Nenhum bloco é garantido"],
-      "correta": 2,
+      "opcoes": [
+        "finally",
+        "else",
+        "except",
+        "Nenhum bloco é garantido"
+      ],
+      "correta": 0,
       "explicacao": "O bloco 'finally' sempre executa, seja para liberar recursos, fechar conexões, ou qualquer limpeza necessária, independentemente do resultado do try (mesmo havendo um 'return' dentro do try, como no exemplo)."
     },
     {
       "pergunta": "Para que serve a instrução 'raise' em Python?",
-      "opcoes": ["Para capturar uma exceção que já ocorreu", "Para lançar (disparar) manualmente uma exceção, interrompendo a operação e sinalizando que algo está errado", "Para finalizar o programa sem mensagem de erro", "Para criar uma nova variável global"],
-      "correta": 1,
+      "opcoes": [
+        "Para finalizar o programa sem mensagem de erro",
+        "Para criar uma nova variável global",
+        "Para lançar (disparar) manualmente uma exceção, interrompendo a operação e sinalizando que algo está errado",
+        "Para capturar uma exceção que já ocorreu"
+      ],
+      "correta": 2,
       "explicacao": "'raise' é usado para lançar uma exceção manualmente, geralmente quando uma regra de negócio é violada (ex: valor inválido), permitindo interromper a operação e sinalizar o problema explicitamente."
     },
     {
       "pergunta": "Em Programação Orientada a Objetos, o que caracteriza uma relação de 'composição' entre classes (ex: uma classe Pedido que contém uma lista de objetos ItemPedido)?",
-      "opcoes": ["As classes não têm relação alguma entre si", "Um objeto de uma classe contém ou gerencia diretamente outros objetos, formando uma estrutura hierárquica de 'todo e partes'", "Composição significa que uma classe herda de outra", "Composição é o mesmo que polimorfismo"],
-      "correta": 1,
+      "opcoes": [
+        "Um objeto de uma classe contém ou gerencia diretamente outros objetos, formando uma estrutura hierárquica de 'todo e partes'",
+        "Composição é o mesmo que polimorfismo",
+        "Composição significa que uma classe herda de outra",
+        "As classes não têm relação alguma entre si"
+      ],
+      "correta": 0,
       "explicacao": "Composição ocorre quando um objeto (como Pedido) contém ou gerencia outros objetos (como uma lista de ItemPedido), representando uma relação de 'parte de' — sem ser herança nem apenas associação simples."
     }
   ]
