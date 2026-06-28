@@ -5,3 +5,4 @@ Jogador;252;medio
 Jogador;40;facil
 Jogador;59;medio
 Jogador;265;dificil
+Jogador;164;medio
